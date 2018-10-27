@@ -1,0 +1,55 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+
+<table id="tablex" class="table table-hover table-bordered">
+    <thead>
+        <tr class="bg-greenx">
+            <th></th>
+            <th class="centerx">Pemberi Tugas</th>
+            <th class="centerx">Uraian Pekerjaan</th>
+            <th class="centerx">Tgl. Mulai</th>
+            <th class="centerx">Durasi</th>
+            <th class="bg-yellowx centerx">Progress</th>
+            <th class="bg-yellowx centerx">Tgl.Selesai</th>
+            <th class="bg-yellowx centerx">Status</th>
+            <th class="bg-yellowx centerx">Keterangan</th>
+            <th class="centerx">Validasi</th>
+            <th class="centerx">Keterangan</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model.DETAIL != null) { Html.RenderPartial("_Inputs_detail_items"); }
+    
+    @for (int i = 1; i < 6; i++)
+    {
+<tr>
+    <td>
+        <div class="btn-group-vertical">
+            <button type="button" onclick="jsVanila.editTableRow(this.parentElement.parentElement.parentElement.rowIndex);" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-pencil"></i></button>
+            <button type="button" onclick="jsVanila.deleteTableRow(this.parentElement.parentElement.parentElement.rowIndex);" class="btn btn-sm btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+        </div>
+    </td>
+    <td>Suherman @i </td>
+    <td>Perencanaan Disain Artwork</td>
+    <td>09/12/2017</td>
+    <td>250 Hari</td>
+    <td>35%</td>
+    <td>25/12/2017</td>
+    <td>Tepat Waktu</td>
+    <td>Tidak ada kesulitan dalam proses perencanaan</td>
+    <td>Tidak sesuai harapan</td>
+    <td>Lakukan peningkatan dalam proses perencanaan kedepan</td>
+</tr>
+    }
+    </tbody>

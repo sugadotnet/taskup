@@ -1,0 +1,46 @@
+﻿
+<script id="template" type="x-tmpl-mustache">
+{{ #result_detail }}
+    <tr>
+        <td>
+            <div class="btn-group-vertical">
+                <!-- Admin -->
+                <input type="hidden" value="{{ currentRow }}" tag-id="currentRow" id="currentRow{{currentRow}}" name="currentRow{{currentRow}}" />
+                <input type="hidden" value="{{ DTA_STS }}" tag-id="DTA_STS" id="DETAIL[{{currentRow}}].DTA_STS" name="DETAIL[{{currentRow}}].DTA_STS" />
+                <input type="hidden" value="{{ ID }}" tag-id="ID" id="DETAIL[{{currentRow}}].ID" name="DETAIL[{{currentRow}}].ID" />
+                <input type="hidden" value="{{ ASSIGNEE_ID }}" tag-id="ASSIGNEE_ID" id="DETAIL[{{currentRow}}].ASSIGNEE_ID" name="DETAIL[{{currentRow}}].ASSIGNEE_ID" />
+                <input type="hidden" value="{{ PROJECT_ID }}" tag-id="PROJECT_ID" id="DETAIL[{{currentRow}}].PROJECT_ID" name="DETAIL[{{currentRow}}].PROJECT_ID" />
+                <input type="hidden" value="{{ TASKD_PLANDESC }}" tag-id="TASKD_PLANDESC" id="DETAIL[{{currentRow}}].TASKD_PLANDESC" name="DETAIL[{{currentRow}}].TASKD_PLANDESC" />
+                <input type="hidden" value="{{ TASKD_PLANSTARTDT }}" tag-id="TASKD_PLANSTARTDT" id="DETAIL[{{currentRow}}].TASKD_PLANSTARTDT" name="DETAIL[{{currentRow}}].TASKD_PLANSTARTDT" />
+                <input type="hidden" value="{{ TASKD_PLANDURATION }}" tag-id="TASKD_PLANDURATION" id="DETAIL[{{currentRow}}].TASKD_PLANDURATION" name="DETAIL[{{currentRow}}].TASKD_PLANDURATION" />
+                <input type="hidden" value="{{ TASKD_PLANENDDT }}" tag-id="TASKD_PLANENDDT" id="DETAIL[{{currentRow}}].TASKD_PLANENDDT" name="DETAIL[{{currentRow}}].TASKD_PLANENDDT" />
+                <!-- Progress -->
+                <input type="hidden" value="{{ TASKD_PROGRESSSTS }}" tag-id="TASKD_PROGRESSSTS" id="DETAIL[{{currentRow}}].TASKD_PROGRESSSTS" name="DETAIL[{{currentRow}}].TASKD_PROGRESSSTS" />
+                <input type="hidden" value="{{ TASKD_PROGRESSPCT }}" tag-id="TASKD_PROGRESSPCT" id="DETAIL[{{currentRow}}].TASKD_PROGRESSPCT" name="DETAIL[{{currentRow}}].TASKD_PROGRESSPCT" />
+                <input type="hidden" value="{{ TASKD_PROGRESSDT }}" tag-id="TASKD_PROGRESSDT" id="DETAIL[{{currentRow}}].TASKD_PROGRESSDT" name="DETAIL[{{currentRow}}].TASKD_PROGRESSDT" />
+                <input type="hidden" value="{{ TASKD_PROGRESSFINISHDT }}" tag-id="TASKD_PROGRESSFINISHDT" id="DETAIL[{{currentRow}}].TASKD_PROGRESSFINISHDT" name="DETAIL[{{currentRow}}].TASKD_PROGRESSFINISHDT" />
+                <input type="hidden" value="{{ TASKD_PROGRESSNOTES }}" tag-id="TASKD_PROGRESSNOTES" id="DETAIL[{{currentRow}}].TASKD_PROGRESSNOTES" name="DETAIL[{{currentRow}}].TASKD_PROGRESSNOTES" />
+                <!-- Validate -->
+                <input type="hidden" value="{{ TASKD_VALIDATESTS }}" tag-id="TASKD_VALIDATESTS" id="DETAIL[{{currentRow}}].TASKD_VALIDATESTS" name="DETAIL[{{currentRow}}].TASKD_VALIDATESTS" />
+                <input type="hidden" value="{{ TASKD_VALIDATENOTES }}" tag-id="TASKD_VALIDATENOTES" id="DETAIL[{{currentRow}}].TASKD_VALIDATENOTES" name="DETAIL[{{currentRow}}].TASKD_VALIDATENOTES" />
+                <!-- Button -->
+                <button type="button" value="{{ currentRow }}" class="btnEditRow btn btn-sm btn-flat btn-warning"><i class="fa fa-pencil"></i></button>
+                <button type="button" value="{{ currentRow }}" class="btnDeleteRow btn btn-sm btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </td>
+        <td>{{ ASSIGNEE_NAME }}</td>
+        <td>{{ RES_NAME }}</td>
+        <td>{{ PROJECT_SHORTDESC }}</td>
+        <td>{{ TASKD_PLANDESC }}</td>
+        <td>{{ TASKD_PLANSTARTDT }}</td>
+        <td>{{ TASKD_PLANDURATION }} Hari</td>
+        <td>{{ TASKD_PLANENDDT }}</td>
+        <td>{{ TASKD_PROGRESSPCT }}</td>
+        <td>{{ TASKD_PROGRESSFINISHDT_STRING }}</td>
+        <td>{{ PROGRESSSTS_SHORTDESC }}</td>
+        <td>{{ TASKD_PROGRESSNOTES }}</td>
+        <td>{{ VALIDATESTS_SHORTDESC }}</td>
+        <td>{{ TASKD_VALIDATENOTES }}</td>
+    </tr>    
+{{ /result_detail }}
+</script>    

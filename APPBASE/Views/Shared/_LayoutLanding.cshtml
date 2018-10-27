@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Appname = "Taskup " + hlpConfig.SessionInfo.getAppVer();
+}
+
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+@using APPBASE.Svcapp
+
+<!DOCTYPE html>
+<html lang="en" style="background-color:#5A5A5A;">
+    <head>
+        <meta charset="UTF-8">
+        <title>@ViewBag.Appname</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
+        <!-- csslayout -->
+        <link href="@Url.Content("~/")Content/AdminLTE/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/")Content/AdminLTE/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/")Content/AdminLTE/css/AdminLTE_green.css" rel="stylesheet" type="text/css" />
+        <link href="@Url.Content("~/")Content/Site.css" rel="stylesheet" type="text/css" />
+        @RenderSection("includeTOP", required: false)
+    </head>
+    <body style="background-color:#5A5A5A;">
+        
+        <!-- Untuk keperluan setting selected menu -->
+        <input type="hidden" id="menuActive" value="@Url.RequestContext.HttpContext.Request.RawUrl" />
+        @RenderBody()
+
+        @{Html.RenderPartial("_PartialJSVAR");}
+        <!-- JSLayoutLogin -->
+        <script src="@Url.Content("~/")Scripts/jquery-2.1.1.min.js"></script>
+        <script src="@Url.Content("~/")Scripts/bootstrap.min.js"></script>
+        
+        @RenderSection("includeBOTTOM", required: false)
+        @RenderSection("scripts", required: false)
+
+
+    </body>
+</html>

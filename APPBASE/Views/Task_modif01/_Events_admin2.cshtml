@@ -1,0 +1,240 @@
+﻿
+<script type="text/javascript">
+
+    //Closure to prevent global variable in javascript
+    (function () {
+        /*====================== jQuery syntax ======================*/
+        $("[data-mask]").inputmask(); //Optional if contains date field(s)
+        $RES_ID = $("#RES_ID");
+        $RES_ID.select2();
+        $ASSIGNEE_ID = $("#ASSIGNEE_ID");
+        $PROJECT_ID = $("#PROJECT_ID");
+        $ROLE_ID = $("#USER_ROLE_ID");
+        if ((parseInt($ROLE_ID.val()) === 1) || (parseInt($ROLE_ID.val()) === 2)) {
+            $ASSIGNEE_ID.select2();
+        } //end if
+        $PROJECT_ID.select2();
+
+        /*====================== vanilla syntax ======================*/
+        //Init jQuery Object
+        var $DialogModal = $("#DialogAddDetail");
+        //Init Field Object
+        jsVanila.inputMaskIntegerPct();
+        var RES_ID = document.getElementById("RES_ID");
+        var detailAction = document.getElementById("detailAction");
+        var detailActionRow = document.getElementById("detailActionRow");
+        var USER_NAME = document.getElementById("USER_NAME");
+        var USER_ROLE_ID = document.getElementById("USER_ROLE_ID");
+        var USER_RES_ID = document.getElementById("USER_RES_ID");
+        var USER_RES_NAME = document.getElementById("USER_RES_NAME");
+
+        //Init Dialog Field Object
+        var ID = document.getElementById("ID");
+        var DTA_STS = document.getElementById("DTA_STS");
+        var ASSIGNEE_ID = document.getElementById("ASSIGNEE_ID");
+        var ASSIGNEE_NAME = document.getElementById("ASSIGNEE_NAME");
+        var PROJECT_ID = document.getElementById("PROJECT_ID");
+        var PROJECT_SHORTDESC = document.getElementById("PROJECT_SHORTDESC");
+        var TASKD_PLANDESC = document.getElementById("TASKD_PLANDESC");
+        var TASKD_PLANSTARTDT = document.getElementById("TASKD_PLANSTARTDT");
+        var TASKD_PLANDURATION = document.getElementById("TASKD_PLANDURATION");
+        //Init Button Object
+        var btnDialogOk = document.getElementById("btnDialogOk");
+        var btnAddRow = document.getElementById("btnAddRow");
+        var btnEditRow = document.getElementsByClassName("btnEditRow");
+        var btnDeleteRow = document.getElementsByClassName("btnDeleteRow");
+        //Initial Other Object
+        var elTarget = document.getElementById("target");
+        var elTemplate = document.getElementById("template").innerHTML;
+        //Init Variable
+        var data = JSON.parse(document.getElementById("JSON").value);
+        //Event Listener Field Changed
+        if (RES_ID != null) { RES_ID.onchange = eventChangeResId; }
+        if (ASSIGNEE_ID != null) { ASSIGNEE_ID.onchange = eventChangeAssigneeId; }
+        if (PROJECT_ID != null) { PROJECT_ID.onchange = eventChangeProjectId; }
+        //Event Listener Button Clicked
+        if (btnDialogOk != null) { btnDialogOk.addEventListener("click", eventDisplayDialogResult); }
+        if (btnAddRow != null) { btnAddRow.addEventListener("click", eventAddRow); }
+        if (btnEditRow != null) { eventsEditRow(btnEditRow); }
+        if (btnDeleteRow != null) { eventsDeleteRow(btnDeleteRow); }
+        //Execute
+        if (data.result_detail.length > 0) {
+            recalcDataRow();
+            resetDataDate();
+            renderDetail();
+            setDetailEvents();
+            //console.log(data);
+        } //end if
+        function eventChangeResId() {
+            var elSelector = [];
+            elSelector.push({ source: "JOBTITLE_SHORTDESC", target: "RES_JOBTITLESHORTDESC" });
+            elSelector.push({ source: "UNIT_SHORTDESC", target: "UNIT_SHORTDESC" });
+            elSelector.push({ source: "SUPERIOR_ID", target: "RESBOS_ID" });
+            elSelector.push({ source: "SUPERIOR_NAME", target: "RESBOS_NAME" });
+            vsUrl = BaseUrl + "Employee/getData/" + this.value;
+            jsVanila.displayLookUpResult(vsUrl, elSelector);
+        } //end event method
+        function eventChangeAssigneeId() {
+            var voSelector = new Array();
+            voSelector[0] = { source: "NAME", target: "ASSIGNEE_NAME" };
+            vsUrl = BaseUrl + "Employee/getData/" + this.value;
+            jsVanila.displayLookUpResult(vsUrl, voSelector);
+        } //end event method
+        function eventChangeProjectId() {
+            var voSelector = new Array();
+            voSelector[0] = { source: "PROJECT_SHORTDESC", target: "PROJECT_SHORTDESC" };
+            vsUrl = BaseUrl + "Project/getData/" + this.value;
+            jsVanila.displayLookUpResult(vsUrl, voSelector);
+        } //end event method
+        function eventsEditRow(el) {
+            if (el != null) {
+                for (var i = 0; i < el.length; i++) {
+                    el[i].addEventListener("click", function () {
+                        eventEditRow(this);
+                    });
+                } //end loop
+            } //end if
+        } //end events method
+        function eventsDeleteRow(el) {
+            if (el != null) {
+                for (var i = 0; i < el.length; i++) {
+                    el[i].addEventListener("click", function () {
+                        eventDeleteRow(this);
+                    });
+                } //end loop
+            } //end if
+        } //end events method
+        function eventAddRow() {
+            detailAction.value = 1; //Add row
+            if (parseInt(USER_ROLE_ID.value) === 3) {
+                ASSIGNEE_ID.value = USER_RES_ID.value;
+                ASSIGNEE_NAME.value = USER_RES_NAME.value;
+            } //end if
+        } //end event method
+        function eventEditRow(el) {
+            detailAction.value = 2; //Edit row
+            detailActionRow.value = el.value;
+            showEditDialog();
+        } //end event method
+        function eventDeleteRow(el) {
+            detailAction.value = 3; //Delete row
+            detailActionRow.value = el.value;
+            deleteDetail();
+        } //end event method
+        function eventDisplayDialogResult() {
+            //Add row
+            if (detailAction.value == 1) {
+                addDetail();
+            } //end if
+            //Edit row
+            if (detailAction.value == 2) {
+                editDetail();
+            } //end if
+        } //end event method
+        function recalcDataRow() {
+            for (var i = 0; i < data.result_detail.length; i++) {
+                data.result_detail[i].currentRow = i;
+            } //end loop
+        } //end method
+        function resetDataDate() {
+            for (var i = 0; i < data.result_detail.length; i++) {
+                data.result_detail[i].TASKD_PLANSTARTDT = data.result_detail[i].TASKD_PLANSTARTDT_STRING;
+                data.result_detail[i].TASKD_PLANENDDT = data.result_detail[i].TASKD_PLANENDDT_STRING;
+                data.result_detail[i].TASKD_PROGRESSDT = data.result_detail[i].TASKD_PROGRESSDT_STRING;
+                data.result_detail[i].TASKD_PROGRESSFINISHDT = data.result_detail[i].TASKD_PROGRESSFINISHDT_STRING;
+            } //end loop
+        } //end function
+        function renderDetail() {
+            Mustache.parse(elTemplate);   // optional, speeds up future uses
+            var output = Mustache.render(elTemplate, data);
+            elTarget.innerHTML = output;
+        } //end method
+        function setDetailEvents() {
+            var elEdit = elTarget.querySelectorAll(".btnEditRow");
+            eventsEditRow(elEdit);
+            var elDelete = elTarget.querySelectorAll(".btnDeleteRow");
+            eventsDeleteRow(elDelete);
+        } //end method
+        function setDetail(item) {
+            item.ASSIGNEE_ID = ASSIGNEE_ID.value;
+            item.ASSIGNEE_NAME = ASSIGNEE_NAME.value;
+            item.PROJECT_ID = PROJECT_ID.value;
+            item.PROJECT_SHORTDESC = PROJECT_SHORTDESC.value;
+            item.TASKD_PLANDESC = TASKD_PLANDESC.value;
+            item.TASKD_PLANSTARTDT = TASKD_PLANSTARTDT.value;
+            item.TASKD_PLANDURATION = TASKD_PLANDURATION.value;
+            item.TASKD_PLANENDDT = jsVanila.addDays(item.TASKD_PLANSTARTDT, item.TASKD_PLANDURATION);
+        } //end method
+        function addDetail() {
+            var item = Object.assign({}, data.result_detail_template);
+            setDetail(item);
+            data.result_detail.push(item);
+            saveAll();
+        } //end method
+        function editDetail() {
+            var item_before = {};
+            item_before = data.result_detail[detailActionRow.value];
+            var item = data.result_detail[detailActionRow.value];
+            if (data.result_detail[detailActionRow.value].ID !== null) {
+                setDetail(item);
+                saveAll();
+            } //end if
+        } //end method
+        function deleteDetail() {
+            if (data.result_detail[detailActionRow.value].ID !== null) {
+                setCurrentRowValue();
+                saveAll();
+            } //end if
+        } //end method
+        function saveAll() {
+            recalcDataRow();
+            renderDetail();
+            setDetailEvents();
+            document.getElementById("formCRUD").submit();
+        } //end method
+        function setCurrentRowValue() {
+            var item = data.result_detail[detailActionRow.value];
+            //MASTER / ADMIN
+            if ((parseInt(USER_ROLE_ID.value) === 1) || (parseInt(USER_ROLE_ID.value) === 2)) {
+                $ASSIGNEE_ID.val(item.ASSIGNEE_ID); // Select the option with a value of '1'
+                $ASSIGNEE_ID.trigger('change'); // Notify any JS components that the value changed
+            } else {
+                ASSIGNEE_ID.value = item.ASSIGNEE_ID;
+                ASSIGNEE_NAME.value = item.ASSIGNEE_NAME;
+            }
+            $PROJECT_ID.val(item.PROJECT_ID); // Select the option with a value of '1'
+            $PROJECT_ID.trigger('change'); // Notify any JS components that the value changed
+            ID.value = item.ID;
+            DTA_STS.value = item.DTA_STS;
+            TASKD_PLANDESC.value = item.TASKD_PLANDESC;
+            TASKD_PLANSTARTDT.value = item.TASKD_PLANSTARTDT;
+            TASKD_PLANDURATION.value = item.TASKD_PLANDURATION;
+        } //end method
+        function showEditDialog() {
+            setCurrentRowValue();
+            $DialogModal.modal();
+        } //end method
+
+        function showEditDialog_BACKUP() {
+            var item = data.result_detail[detailActionRow.value];
+            console.log(item);
+            //MASTER / ADMIN
+            if ((parseInt(USER_ROLE_ID.value) === 1) || (parseInt(USER_ROLE_ID.value) === 2)) {
+                $ASSIGNEE_ID.val(item.ASSIGNEE_ID); // Select the option with a value of '1'
+                $ASSIGNEE_ID.trigger('change'); // Notify any JS components that the value changed
+            } else {
+                ASSIGNEE_ID.value = item.ASSIGNEE_ID;
+                ASSIGNEE_NAME.value = item.ASSIGNEE_NAME;
+            }
+            $PROJECT_ID.val(item.PROJECT_ID); // Select the option with a value of '1'
+            $PROJECT_ID.trigger('change'); // Notify any JS components that the value changed
+            ID.value = item.ID;
+            DTA_STS.value = item.DTA_STS;
+            TASKD_PLANDESC.value = item.TASKD_PLANDESC;
+            TASKD_PLANSTARTDT.value = item.TASKD_PLANSTARTDT;
+            TASKD_PLANDURATION.value = item.TASKD_PLANDURATION;
+            $DialogModal.modal();
+        } //end method
+    })();                                 //end function closure
+</script>
+

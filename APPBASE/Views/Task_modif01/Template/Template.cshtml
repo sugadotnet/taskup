@@ -1,0 +1,19 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MASTER)
+{
+    Html.RenderPartial("~/Views/Task/Template/Template_admin.cshtml");
+}
+@if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_ADMIN)
+{
+    Html.RenderPartial("~/Views/Task/Template/Template_admin.cshtml");
+}
+@if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_LEADER)
+{
+    Html.RenderPartial("~/Views/Task/Template/Template_validate.cshtml");
+}
+@if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MEMBER)
+{
+    Html.RenderPartial("~/Views/Task/Template/Template_progress.cshtml");
+}

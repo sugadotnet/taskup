@@ -1,0 +1,12 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@if (hlpConfig.SessionInfo.getAppRoleId()==valROLE.ROLEID_MASTER){
+    Html.RenderPartial("~/Views/Task/Dialog2/Dialog_detail_items_admin.cshtml");
+}
+@if (hlpConfig.SessionInfo.getAppRoleId()==valROLE.ROLEID_ADMIN){
+    Html.RenderPartial("~/Views/Task/Dialog2/Dialog_detail_items_admin.cshtml");
+}
+@if (hlpConfig.SessionInfo.getAppRoleId()==valROLE.ROLEID_LEADER){
+    Html.RenderPartial("~/Views/Task/Dialog2/Dialog_detail_items_leader.cshtml");
+}

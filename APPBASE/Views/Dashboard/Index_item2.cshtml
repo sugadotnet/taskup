@@ -1,0 +1,21 @@
+﻿@model APPBASE.Models.Taskd_summaryVM
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+<!-- small box -->
+<div class="small-box bg-yellow">
+    <div class="inner">
+        <h3>
+            @Html.DisplayFor( modelitem => modelitem.QTY_ONPROGRESS)
+        </h3>
+        <p>
+            Tugas Dikerjakan
+        </p>
+    </div>
+    <div class="icon">
+        <i class="ion ion-stats-bars"></i>
+    </div>
+    <a href="@Url.Action("Index2", "Task", new { id = 2 })" class="small-box-footer">
+        Tampilkan <i class="fa fa-arrow-circle-right"></i>
+    </a>
+</div>

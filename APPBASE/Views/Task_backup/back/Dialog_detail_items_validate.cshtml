@@ -1,0 +1,37 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group @vsErrClass col-sm-12 col-md-6">
+            <label for="TASKD_VALIDATESTS">Validasi</label>
+                <select id="TASKD_VALIDATESTS" name="TASKD_VALIDATESTS" class="form-control select2" data-placeholder="" style="width: 100%;" @vsReadonlyTextbox>
+                    <option selected value=""></option>
+                    <option value="1">Luar Biasa</option>
+                    <option value="2">Memuaskan</option>
+                    <option value="3">Memenuhi Harapan</option>
+                    <option value="4">Kurang</option>
+                    <option value="5">Tidak Sesuai Harapan</option>
+                </select>
+        </div> <!-- /.form-group -->
+    </div> <!-- end row -->
+
+        <div class="form-group @vsErrClass">
+            <label for="TASKD_VALIDATENOTES">Catatan</label>
+            <input type="text" id="TASKD_VALIDATENOTES" name="TASKD_VALIDATENOTES" class="form-control" maxlength = "100" @vsReadonlyTextbox />
+        </div> <!-- /.form-group -->
+</div> <!-- end modal-body -->
+<div class="modal-footer">
+    <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button id="btnApplyValidate" type="button" class="btn btn-primary">Add</button>
+</div> <!-- end modal-footer -->
+

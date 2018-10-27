@@ -1,0 +1,33 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="modal-body">
+    <div class="row">
+        <div class="form-group @vsErrClass col-sm-12 col-md-2">
+            <label for="TASKD_PROGRESSPCT">Progress</label>
+            <input type="text" id="TASKD_PROGRESSPCT" name="TASKD_PROGRESSPCT" class="form-control data-mask-integer-percentage"  @vsReadonlyTextbox />
+        </div> <!-- /.form-group -->
+    </div> <!-- end row -->
+        <div class="form-group @vsErrClass">
+            <label for="TASKD_PROGRESSDT">Tgl.Selesai</label>
+            <input type="text" id="TASKD_PROGRESSDT" name="TASKD_PROGRESSDT" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+        </div> <!-- /.form-group -->
+        <div class="form-group @vsErrClass">
+            <label for="TASKD_PROGRESSNOTES">Keterangan</label>
+            <input type="text" id="TASKD_PROGRESSNOTES" name="TASKD_PROGRESSNOTES" class="form-control" maxlength = "100" @vsReadonlyTextbox />
+        </div> <!-- /.form-group -->
+</div> <!-- end modal-body -->
+<div class="modal-footer">
+    <button id="btnCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button id="btnApplyProgress" type="button" class="btn btn-primary">Add</button>
+</div> <!-- end modal-footer -->
+

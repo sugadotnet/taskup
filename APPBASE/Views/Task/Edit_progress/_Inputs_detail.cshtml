@@ -1,0 +1,24 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="row">
+    <div class="col-sm-12 col-md-4">
+        @{Html.RenderPartial("~/Views/Task/Details2_input/_Inputs_detail_items1.cshtml");}
+    </div> <!-- col -->
+    <div class="col-sm-12 col-md-4">
+        @{Html.RenderPartial("~/Views/Task/Edit_progress/_Inputs_detail_items2.cshtml");}
+    </div> <!-- col -->
+    <div class="col-sm-12 col-md-4">
+        @{Html.RenderPartial("~/Views/Task/Details2_input/_Inputs_detail_items3.cshtml");}
+    </div> <!-- col -->
+</div> <!-- row -->
+    

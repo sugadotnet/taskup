@@ -1,0 +1,181 @@
+﻿<script type="text/javascript">
+
+    //Closure to prevent global variable in javascript
+    (function () {
+        /*====================== jQuery syntax ======================*/
+
+        $("[data-mask]").inputmask(); //Optional if contains date field(s)
+        //inputIntegerPct();
+        $(".select2").select2();
+
+        /*====================== vanilla syntax ======================*/
+        //Testing area
+        //var dataSourceKey = Object.keys(dataSource.result);
+        //var dataSourceKey_detail = Object.keys(dataSource.result_detail);
+        //var data = { rows: dataSource.result_detail.length, items: dataSource.result_detail }
+        //        for (var i = 0; i < result_key.length; i++) {
+        //            console.log(result_key[i] + ": " + oJson.result[result_key[i]]);
+        //        }
+
+        //Init jQuery Object
+        var $DialogModal = $("#DialogAddDetail");
+        //Init Field Object
+        jsVanila.inputMaskIntegerPct();
+        var resId = document.getElementById("RES_ID");
+        var assigneeId = document.getElementById("ASSIGNEE_ID");
+        var detailAction = document.getElementById("detailAction");
+        var detailActionRow = document.getElementById("detailActionRow");
+        //Init Button Object
+        var btnAddRow = document.getElementById("btnAddRow");
+        var btnDialogOk = document.getElementById("btnDialogOk");
+        var btnEditRow = document.getElementsByClassName("btnEditRow");
+        var btnDeleteRow = document.getElementsByClassName("btnDeleteRow");
+        //Initial Other Object
+        var elTarget = document.getElementById("target");
+        var elTemplate = document.getElementById("template").innerHTML;
+        //Init Variable
+        var data = JSON.parse(document.getElementById("JSON").value);
+
+        //Define function
+        function renderDetail() {
+            for (var i = 0; i < data.result_detail.length; i++) {
+                data.result_detail[i].currentRow = i;
+                data.result_detail[i].TASKD_PLANSTARTDT = data.result_detail[i].TASKD_PLANSTARTDT_STRING;
+                data.result_detail[i].TASKD_PLANENDDT = data.result_detail[i].TASKD_PLANENDDT_STRING;
+                data.result_detail[i].TASKD_PROGRESSDT = data.result_detail[i].TASKD_PROGRESSDT_STRING;
+                data.result_detail[i].TASKD_PROGRESSFINISHDT = data.result_detail[i].TASKD_PROGRESSFINISHDT_STRING;
+            } //end loop
+            Mustache.parse(elTemplate);   // optional, speeds up future uses
+            var output = Mustache.render(elTemplate, data);
+            elTarget.innerHTML = output;
+            var elEdit = elTarget.querySelectorAll(".btnEditRow");
+            eventDeleteRow(elEdit);
+            var elDelete = elTarget.querySelectorAll(".btnDeleteRow");
+            eventDeleteRow(elDelete);
+        } //end method
+        function setDetail(item) {
+            item.ASSIGNEE_ID = document.getElementById("ASSIGNEE_ID").value;
+            item.ASSIGNEE_NAME = document.getElementById("ASSIGNEE_NAME").value;
+            item.TASKD_PLANDESC = document.getElementById("TASKD_PLANDESC").value;
+            item.TASKD_PLANSTARTDT = document.getElementById("TASKD_PLANSTARTDT").value;
+            item.TASKD_PLANDURATION = document.getElementById("TASKD_PLANDURATION").value;
+            item.TASKD_PLANENDDT = jsVanila.addDays(item.TASKD_PLANSTARTDT, item.TASKD_PLANDURATION);
+        } //end method
+        function addDetail() {
+            var item = Object.assign({}, data.result_detail_template);
+            setDetail(item);
+            data.result_detail.push(item);
+        } //end method
+        function editDetail() {
+            var item = data.result_detail[detailActionRow.value];
+            setDetail(item);
+        } //end method
+        function deleteDetail() {
+            //console.log(data.result_detail);
+            data.result_detail.splice(detailActionRow.value, 1);
+            //console.log(data.result_detail);
+        } //end method
+        function showEditDialog() {
+            var item = data.result_detail[detailActionRow.value];
+            document.getElementById("ASSIGNEE_ID").value = item.ASSIGNEE_ID;
+            document.getElementById("ASSIGNEE_NAME").value = item.ASSIGNEE_NAME;
+            document.getElementById("TASKD_PLANDESC").value = item.TASKD_PLANDESC;
+            document.getElementById("TASKD_PLANSTARTDT").value = item.TASKD_PLANSTARTDT;
+            document.getElementById("TASKD_PLANDURATION").value = item.TASKD_PLANDURATION;
+            $DialogModal.modal();
+        } //end method
+
+        //Init Method
+        if (data.result_detail.length > 0) renderDetail();
+        //LOOKUP [[[::RES_ID::]]]
+        resId.onchange = function () {
+            var voSelector = new Array();
+            voSelector[0] = { source: "JOBTITLE_SHORTDESC", target: "RES_JOBTITLESHORTDESC" };
+            voSelector[1] = { source: 'UNIT_SHORTDESC', target: 'UNIT_SHORTDESC' };
+            vsUrl = BaseUrl + "Employee/getData/" + this.value;
+            jsVanila.displayLookUpResult(vsUrl, voSelector);
+        } //end method
+        //LOOKUP [[[::ASSIGNEE_ID::]]]
+        if (assigneeId != null) {
+            assigneeId.onchange = function () {
+                var voSelector = new Array();
+                voSelector[0] = { source: "NAME", target: "ASSIGNEE_NAME" };
+                vsUrl = BaseUrl + "Employee/getData/" + this.value;
+                jsVanila.displayLookUpResult(vsUrl, voSelector);
+            } //end method
+        } //end if
+        //BUTTON [[::btnDialogOk::]]
+        if (btnDialogOk != null) {
+            btnDialogOk.onclick = function () {
+                //Add row
+                if (detailAction.value == 1) {
+                    addDetail();
+                    renderDetail();
+                } //end if
+                //Edit row
+                if (detailAction.value == 2) {
+                    editDetail();
+                    renderDetail();
+                } //end if
+            } //end method
+        } //end if
+        //BUTTON [[::btnAddRow::]]
+        if (btnAddRow != null) {
+            btnAddRow.onclick = function () {
+                detailAction.value = 1; //Add row
+            } //end method
+        } //end object
+        //BUTTON [[::btnEditRow::]]
+        if (btnEditRow != null) {
+            eventEditRow(btnEditRow)
+        } //end if
+        function eventEditRow(el) {
+            if (el != null) {
+                for (var i = 0; i < el.length; i++) {
+                    //console.log(btnDeleteRow[i]);
+                    el[i].addEventListener("click", function () {
+                        //editRow(this);
+                    });
+                } //end loop
+            } //end if
+        } //end method
+        function editRow(el) {
+            detailAction.value = 2; //Edit row
+            detailActionRow.value = el.value;
+            showEditDialog();
+        } //end method
+        for (var i = 0; i < btnEditRow.length; i++) {
+
+            //            btnEditRow[i].onclick = function () {
+            //                console.log(btnEditRow[i]);
+            //                detailAction.value = 2; //Edit row
+            //                detailActionRow.value = btnEditRow[i].value;
+            //                showEditDialog();
+            //            } //end event
+
+        } //end loop
+
+
+        //BUTTON [[:: btnDeleteRow ::]]
+        if (btnDeleteRow != null) {
+            eventDeleteRow(btnDeleteRow)
+        } //end if
+        function eventDeleteRow(el) {
+            if (el != null) {
+                for (var i = 0; i < el.length; i++) {
+                    //console.log(btnDeleteRow[i]);
+                    el[i].addEventListener("click", function () {
+                        deleteRow(this);
+                    });
+                } //end loop
+            } //end if
+        } //end method
+        function deleteRow(el) {
+            detailAction.value = 3; //Delete row
+            detailActionRow.value = el.value;
+            deleteDetail();
+            renderDetail();
+        } //end method
+    })();                                                                          //end function closure
+</script>
+

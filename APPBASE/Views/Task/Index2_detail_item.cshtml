@@ -1,0 +1,63 @@
+﻿@model IEnumerable<APPBASE.Models.TaskdVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+@using APPBASE.Svcutil
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="SEARCHABLE_ROWS">
+            <div class="row">
+                <div style="text-align:center;" class="col-sm-12 col-md-3">
+                    <div>
+                        <a href="@Url.Action("Details", new { id = item.ID })">
+                            <img class="img-circle" id="imgEMPLOYEE_IMG" src="@Url.Content("~/")@Utility_FileUploadDownload.getImage_Employee(item.RES_EMPLOYEE_IMG)" alt="Foto" />
+                        </a>
+                    </div>
+                    <h4>@Html.DisplayFor(modelItem => item.RES_NAME)</h4>
+                    <div>@Html.DisplayFor(modelItem => item.UNIT_SHORTDESC) - @Html.DisplayFor(modelItem => item.RES_JOBTITLESHORTDESC)</div>
+                    <div>
+                        <a href="@Url.Action("Details2", new { id = item.ID})" class="btn btn-flat btn-sm btn-warning" style="color:White;"><i class="fa fa-edit "></i> Lihat Rincian</a>
+                    </div>
+                </div> <!-- col -->
+
+                <div class="col-sm-12 col-md-9">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>Agenda Bulan</th>
+                            <td>: <small class="badge bg-green">@Html.DisplayFor(modelItem => item.MONTH_DESC) @Html.DisplayFor(modelItem => item.YEAR_DESC)</small></td>
+                        </tr>
+                        <tr>
+                            <th>Project</th>
+                            <td>: @Html.DisplayFor(modelItem => item.PROJECT_SHORTDESC)</td>
+                        </tr>
+                        <tr>
+                            <th>Uraian Pekerjaan</th>
+                            <td>: @Html.DisplayFor(modelItem => item.TASKD_PLANDESC)</td>
+                        </tr>
+                        <tr>
+                            <th style="width:20%;">Pemberi Tugas</th>
+                            <td style="width:80%;">: @Html.DisplayFor(modelItem => item.ASSIGNEE_NAME)</td>
+                        </tr>
+                        <tr>
+                            <th>Tgl. Mulai</th>
+                            <td>: @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANSTARTDT)</td>
+                        </tr>
+                        <tr>
+                            <th>Durasi</th>
+                            <td>: @Html.DisplayFor(modelItem => item.TASKD_PLANDURATION)</td>
+                        </tr>
+                        <tr>
+                            <th>Tgl. Selesai</th>
+                            <td>: @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANENDDT)</td>
+                        </tr>
+                        <tr>
+                            <th>Progress</th>
+                            <td>: @hlpConvertionAndFormating.ConvertDecimalToStringFmt(item.TASKD_PROGRESSPCT)%</td>
+                        </tr>
+                    </table> <!-- table -->
+                </div> <!-- col -->
+            </div> <!-- row -->
+        </td>
+    </tr>
+}

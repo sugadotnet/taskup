@@ -1,0 +1,23 @@
+﻿@model IEnumerable<APPBASE.Models.TaskdVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @if (Model == null) {
+            <tr>
+                <td align="center">@{Html.RenderPartial("_PartialEmpty");}</td>
+            </tr>
+        }
+
+        @if (Model != null) {
+            Html.RenderPartial("Index2_detail_item");
+        }
+    </tbody>
+</table>

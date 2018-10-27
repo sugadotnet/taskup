@@ -1,0 +1,71 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@{
+    ViewBag.Title = "Informasi Agenda";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Layouts/_Layout_admin.cshtml";
+}
+
+@section includeBOTTOM {
+    @Scripts.Render("~/bundles/JSInputMask")
+}
+
+
+@if (ViewBag.CRUDSavedOrDelete == valFLAG.FLAG_TRUE)
+{
+    Html.RenderPartial("_PartialConfirmSaved");
+}
+
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @{Html.RenderPartial("~/Views/Task/Details2_input/_Inputs.cshtml");}
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-xs-12">
+                @if (Model.TASKD_PROGRESSPCT == 100)
+                {
+                    <!-- MASTER -->
+                    if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MASTER)
+                    {
+                        <a href="@Url.Action("Edit_validate", new { id = Model.ID })" class="btn btn-flat btn-sm btn-success" style="color:White;"><i class="fa fa-edit "></i> Validasi</a>
+                    }
+                    <!-- ADMIN -->
+                    if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_ADMIN)
+                    {
+                        <a href="@Url.Action("Edit_validate", new { id = Model.ID })" class="btn btn-flat btn-sm btn-success" style="color:White;"><i class="fa fa-edit "></i> Validasi</a>
+                    }
+                    <!-- LEADER -->
+                    if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_LEADER)
+                    {
+                        <a href="@Url.Action("Edit_validate", new { id = Model.ID })" class="btn btn-flat btn-sm btn-success" style="color:White;"><i class="fa fa-edit "></i> Validasi</a>
+                    }
+                }
+                @if ((Model.TASKD_VALIDATESTS == null) || (Model.TASKD_VALIDATESTS == 0)) {
+                    <!-- MEMBER -->
+                    if (hlpConfig.SessionInfo.getAppResId() == Model.RES_ID)
+                    {
+                        <a href="@Url.Action("Edit_progress", new { id = Model.ID })" class="btn btn-flat btn-sm btn-warning" style="color:White;"><i class="fa fa-edit "></i> Input Progress</a>
+                    }
+                }
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
+
+<!-- Json data -->
+@{Html.RenderPartial("~/Views/Task/Json/Json.cshtml");}
+<!-- Template -->
+@{Html.RenderPartial("~/Views/Task/Template/Template_view.cshtml");}
+
+@section scripts {
+
+<!-- Modal -->
+@{Html.RenderPartial("_Events");}
+
+}

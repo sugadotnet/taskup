@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="5737bde6-a5be-47d2-83f4-f53f5e96a564" name="jakarta@PC-PROG 2018-01-09 15:02:45" runUser="PC-PROG\jakarta" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="432ff319-9532-48c6-b389-f411b3ffd404">
+    <Deployment runDeploymentRoot="jakarta_PC-PROG 2018-01-09 15_02_45">
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\APPBASE\bin\APPBASE.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll" />
+      <DeploymentItem filename="E:\WRK\WORK\GITLab\HDP\TASKINFO\Src\Development\APPBASE\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2018-01-09T15:02:45.2364310+07:00" queuing="2018-01-09T15:02:53.3668960+07:00" start="2018-01-09T15:02:53.5889087+07:00" finish="2018-01-09T15:02:58.1391690+07:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="3" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="2" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="PC-PROG" outcome="Error" timestamp="2018-01-09T15:02:58.1381690+07:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="Contact" storage="e:\wrk\work\gitlab\hdp\taskinfo\src\development\appbase\appbase.tests\bin\debug\appbase.tests.dll" id="90d093ef-8d4d-2987-9389-d5f4a6ba185e">
+      <Execution id="965ee92c-d17b-4e4e-a769-706bd7f8692d" />
+      <TestMethod codeBase="E:/WRK/WORK/GITLab/HDP/TASKINFO/Src/Development/APPBASE/APPBASE.Tests/bin/Debug/APPBASE.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="APPBASE.Tests.Controllers.HomeControllerTest, APPBASE.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Contact" />
+    </UnitTest>
+    <UnitTest name="Index" storage="e:\wrk\work\gitlab\hdp\taskinfo\src\development\appbase\appbase.tests\bin\debug\appbase.tests.dll" id="37215a5d-40b8-b8f0-2e8f-672316c9c943">
+      <Execution id="bc3274dc-fe8d-42d8-b282-143624c57494" />
+      <TestMethod codeBase="E:/WRK/WORK/GITLab/HDP/TASKINFO/Src/Development/APPBASE/APPBASE.Tests/bin/Debug/APPBASE.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="APPBASE.Tests.Controllers.HomeControllerTest, APPBASE.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Index" />
+    </UnitTest>
+    <UnitTest name="About" storage="e:\wrk\work\gitlab\hdp\taskinfo\src\development\appbase\appbase.tests\bin\debug\appbase.tests.dll" id="3d866754-8dd7-f892-1a2a-89db2520b905">
+      <Execution id="c8fc1a6a-57e1-4fb3-a888-f5ab18e0230d" />
+      <TestMethod codeBase="E:/WRK/WORK/GITLab/HDP/TASKINFO/Src/Development/APPBASE/APPBASE.Tests/bin/Debug/APPBASE.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="APPBASE.Tests.Controllers.HomeControllerTest, APPBASE.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="About" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="37215a5d-40b8-b8f0-2e8f-672316c9c943" executionId="bc3274dc-fe8d-42d8-b282-143624c57494" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d866754-8dd7-f892-1a2a-89db2520b905" executionId="c8fc1a6a-57e1-4fb3-a888-f5ab18e0230d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="90d093ef-8d4d-2987-9389-d5f4a6ba185e" executionId="965ee92c-d17b-4e4e-a769-706bd7f8692d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="bc3274dc-fe8d-42d8-b282-143624c57494" testId="37215a5d-40b8-b8f0-2e8f-672316c9c943" testName="Index" computerName="PC-PROG" duration="00:00:04.3182470" startTime="2018-01-09T15:02:53.8209220+07:00" endTime="2018-01-09T15:02:58.1391690+07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bc3274dc-fe8d-42d8-b282-143624c57494">
+    </UnitTestResult>
+    <UnitTestResult executionId="c8fc1a6a-57e1-4fb3-a888-f5ab18e0230d" testId="3d866754-8dd7-f892-1a2a-89db2520b905" testName="About" computerName="PC-PROG" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c8fc1a6a-57e1-4fb3-a888-f5ab18e0230d">
+    </UnitTestResult>
+    <UnitTestResult executionId="965ee92c-d17b-4e4e-a769-706bd7f8692d" testId="90d093ef-8d4d-2987-9389-d5f4a6ba185e" testName="Contact" computerName="PC-PROG" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="965ee92c-d17b-4e4e-a769-706bd7f8692d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

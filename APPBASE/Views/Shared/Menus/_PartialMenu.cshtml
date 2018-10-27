@@ -1,0 +1,23 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+@{Boolean isIntegrated = true;}
+
+<!-- sidebar menu: : style can be found in sidebar.less -->
+<ul class="sidebar-menu">
+    <li class="active">
+        <a href="@Url.Action("Index", "Home")" class="bg-blue">
+            <i class="fa fa-home"></i> <span>BERANDA</span>
+        </a>
+    </li>
+    
+	@if (hlpConfig.SessionInfo.getAppUsername().ToUpper() == valDFLT.SYSADMIN_USER) {
+        Html.RenderPartial("_PartialMenuSYSADMIN");
+        //if (isIntegrated) { Html.RenderPartial("_PartialMenuExpenseSYSADMIN"); }
+    }
+    else {
+        // 1 = ADM	Admin User
+        // 2 = FIN	Fincance
+        Html.RenderPartial("_PartialMenu" + hlpConfig.SessionInfo.getAppRoleId().ToString());
+        if (isIntegrated) { }
+    }
+</ul>

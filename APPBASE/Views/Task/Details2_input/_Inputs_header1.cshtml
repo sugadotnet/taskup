@@ -1,0 +1,26 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="form-group @vsErrClass">
+    <label for="RES_ID">Nama</label>
+    <div class="form-control">@Html.DisplayFor(modelitem=>modelitem.RES_NAME)</div>
+</div> <!-- /.form-group -->
+
+<div class="form-group @vsErrClass">
+    <label for="RES_JOBTITLESHORTDESC">Jabatan</label>
+    <div class="form-control">@Html.DisplayFor(model => model.RES_JOBTITLESHORTDESC)</div>
+</div> <!-- /.form-group -->
+
+<div class="form-group @vsErrClass">
+    <label for="UNIT_SHORTDESC">Bagian</label>
+    <div class="form-control">@Html.DisplayFor(model => model.UNIT_SHORTDESC)</div>
+</div> <!-- /.form-group -->

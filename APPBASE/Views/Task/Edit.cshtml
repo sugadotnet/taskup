@@ -1,0 +1,70 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@{
+    ViewBag.Title = "Edit Agenda";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Layouts/_Layout_admin.cshtml";
+}
+@section includeBOTTOM {
+    @Scripts.Render("~/bundles/JSInputMask")
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formCRUD" }))
+{
+
+@Html.HiddenFor(model => model.ID)
+<input type="hidden" id="detailAction" />
+<input type="hidden" id="detailActionRow" />
+<input type="hidden" id="USERNAME" value="@hlpConfig.SessionInfo.getAppUsername()" />
+<input type="hidden" id="USER_ROLE_ID" value="@hlpConfig.SessionInfo.getAppRoleId()" />
+<input type="hidden" id="USER_RES_ID" value="@hlpConfig.SessionInfo.getAppResId()" />
+<div>
+    @if (ViewBag.EMPLOYEEUSER != null)
+    {
+        <input type="hidden" id="USER_RES_NAME" value="@ViewBag.EMPLOYEEUSER.NAME" />
+    }
+</div>    
+<div>
+    @if (ViewBag.EMPLOYEEUSER == null)
+    {
+        <input type="hidden" id="USER_RES_NAME" />
+    }
+</div>    
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @{Html.RenderPartial("~/Views/task/Input/_Inputs.cshtml");}
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-primary btn-flat">Simpan Data</button>
+                @if (hlpConfig.SessionInfo.getAppRoleId() != valROLE.ROLEID_MEMBER)
+                {
+                    <button id="btnAddRow" type="button" class="btn btn-warning btn-flat" data-toggle="modal" data-target="#DialogAddDetail">Tambah Tugas</button>
+                }
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
+}
+
+<!-- Json data -->
+@{Html.RenderPartial("~/Views/Task/Json/Json.cshtml");}
+<!-- Template -->
+@{Html.RenderPartial("~/Views/Task/Template/Template_admin.cshtml");}    
+<!-- Modal -->
+@{Html.RenderPartial("_PartialDialogLookup"); Html.RenderPartial("~/Views/Task/Dialog/Dialog_detail.cshtml");}
+
+
+@section scripts {
+
+<!-- Modal -->
+@{Html.RenderPartial("_Events_admin");}
+
+}

@@ -1,0 +1,21 @@
+﻿@model APPBASE.Models.Taskd_summaryVM
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+<!-- small box -->
+<div class="small-box bg-green">
+    <div class="inner">
+        <h3>
+            @Html.DisplayFor( modelitem => modelitem.QTY_FINISH)
+        </h3>
+        <p>
+            Tugas Selesai
+        </p>
+    </div>
+    <div class="icon">
+        <i class="fa fa-check-square-o"></i>
+    </div>
+    <a href="@Url.Action("Index2", "Task", new { id = 3 })" class="small-box-footer">
+        Tampilkan <i class="fa fa-arrow-circle-right"></i>
+    </a>
+</div>

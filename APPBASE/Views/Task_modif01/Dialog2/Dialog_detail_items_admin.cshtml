@@ -1,0 +1,73 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="modal-body">
+    <div class="form-group">
+        <label for="ASSIGNEE_ID">Pemberi Tugas</label>
+        <input type="hidden" id="CURRENT_ROW" place-holder="CURRENT_ROW" />
+        <input type="hidden" id="ASSIGNEE_NAME" place-holder="ASSIGNEE_NAME" />
+        <select id="ASSIGNEE_ID" name="ASSIGNEE_ID" class="form-control select2" data-placeholder="" style="width: 100%;">
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.EMPLOYEE)
+            {
+                <option value="@item.ID">@item.NAME</option>
+            }
+        </select>
+    </div> <!-- /.form-group -->
+    <div class="form-group">
+        <label for="RES_ID">Penerima Tugas</label>
+        <select id="RES_ID" name="RES_ID" class="form-control select2" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.EMPLOYEE)
+            {
+                <option selected value="@item.ID">@item.NAME</option>
+            }
+        </select>
+    </div> <!-- /.form-group -->
+    <div class="form-group @vsErrClass">
+        <label for="PROJECT_ID">Project</label>
+        <input type="hidden" id="PROJECT_SHORTDESC" place-holder="PROJECT_SHORTDESC" />
+        <select id="PROJECT_ID" name="PROJECT_ID" class="form-control select2" data-placeholder="" style="width: 100%;">
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.PROJECT)
+            {
+                <option value="@item.ID">@item.PROJECT_SHORTDESC</option>
+            }
+        </select>
+    </div> <!-- /.form-group -->
+    <div class="form-group">
+        <label for="TASKD_PLANDESC">Uraian Pekerjaan</label>
+        <input type="text" id="TASKD_PLANDESC" name="TASKD_PLANDESC" class="form-control" maxlength = "100" />
+    </div> <!-- /.form-group -->
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="form-group">
+                <label for="TASKD_PLANSTARTDT">Tanggal Mulai</label>
+                <input type="text" id="TASKD_PLANSTARTDT" name="TASKD_PLANSTARTDT" class="form-control" data-inputmask="@vsDateFormat" data-mask />
+            </div> <!-- /.form-group -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+    <div class="row">
+        <div class="col-sm-12 col-md-2">
+            <div class="form-group">
+                <label for="TASKD_PLANDURATION">Durasi</label>
+                <input type="text" id="TASKD_PLANDURATION" name="TASKD_PLANDURATION" class="form-control data-mask-integer" />
+            </div> <!-- /.form-group -->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+</div> <!-- end modal-body -->
+<div class="modal-footer">
+    <button id="btnDialogCancel" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button id="btnDialogOk" type="button" class="btn btn-primary">Apply</button>
+</div> <!-- end modal-footer -->
+

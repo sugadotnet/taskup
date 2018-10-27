@@ -1,0 +1,85 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{
+    ViewBag.Title = "Add Agenda";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/Layouts/_Layout_admin.cshtml";
+}
+@section includeBOTTOM {
+    @Scripts.Render("~/bundles/JSInputMask")
+}
+
+@if (ViewData.ModelState["IS_VALIDATED0"] != null) {
+    <!-- Validasi is validated -->
+    <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-warning"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <b>Perhatian!</b> @Html.ValidationMessage("IS_VALIDATED1")
+    </div>
+}
+
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "formCRUD" }))
+{
+<input type="hidden" id="detailAction" name="DETAIL_ACTION" />
+<input type="hidden" id="detailActionRow" />
+<input type="hidden" id="USERNAME" value="@hlpConfig.SessionInfo.getAppUsername()" />
+<input type="hidden" id="USER_ROLE_ID" value="@hlpConfig.SessionInfo.getAppRoleId()" />
+<input type="hidden" id="USER_RES_ID" value="@hlpConfig.SessionInfo.getAppResId()" />
+<input type="hidden" id="JSON" value="@ViewBag.JSON" />
+<input type="hidden" id="RESOWNER_ID" name="RESOWNER_ID" value="@Model.RESOWNER_ID" />
+<input type="hidden" id="ID" name="ID" />
+<input type="hidden" id="DTA_STS" name="DTA_STS" />
+<input type="hidden" id="TASKD_PLANENDDT" name="TASKD_PLANENDDT" />
+<div>
+    @if (ViewBag.EMPLOYEEUSER != null)
+    {
+        <input type="hidden" id="USER_RES_NAME" value="@ViewBag.EMPLOYEEUSER.NAME" />
+    }
+</div>    
+<div>
+    @if (ViewBag.EMPLOYEEUSER == null)
+    {
+        <input type="hidden" id="USER_RES_NAME" />
+    }
+</div>    
+    
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body table-responsive">
+
+        <div class="row">
+            <div class="col-xs-12">
+                <button id="btnAddRow" type="button" class="btn btn-warning btn-flat" data-toggle="modal" data-target="#DialogAddDetail">Tambah Tugas</button>
+            </div>
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="col-xs-12">
+                @{Html.RenderPartial("~/Views/Task/Input2/_Inputs.cshtml");}
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
+
+<!-- Modal -->
+<div>
+	@{Html.RenderPartial("_PartialDialogLookup"); Html.RenderPartial("~/Views/Task/Dialog2/Dialog_detail.cshtml");}
+</div>
+
+    
+}
+<!-- Template -->
+@{Html.RenderPartial("~/Views/Task/Template2/Template_admin.cshtml");}    
+
+
+@section scripts {
+
+<!-- Events -->
+@{Html.RenderPartial("_Events_admin2");}
+
+}

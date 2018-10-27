@@ -1,0 +1,48 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section includeTOP {
+}
+
+@section includeBOTTOM {
+}
+
+
+@section TitleIcon {
+    <i class="fa fa-home"></i>
+}
+
+<div class="row">
+    <div class="col-sm-12 col-md-3">
+        @{Html.RenderPartial("Index_item1");}
+    </div> <!-- col -->
+    <div class="col-sm-12 col-md-3">
+        @{Html.RenderPartial("Index_item2");}
+    </div> <!-- col -->
+    <div class="col-sm-12 col-md-3">
+        @{Html.RenderPartial("Index_item3");}
+    </div> <!-- col -->
+    <div class="col-sm-12 col-md-3">
+        @{Html.RenderPartial("Index_item4");}
+    </div> <!-- col -->
+</div> <!-- row -->
+
+<!-- MASTER/ADMIN/LEADER -->
+@if (hlpConfig.SessionInfo.getAppRoleId() <= 3)
+{
+    <button type="button" onclick="window.location.href='@Url.Action("Create", "Task")'" class="btn btn-lg btn-warning btn-circle" style="height: 48px; width:48px;"><i class="fa fa-pencil"></i></button>
+}
+
+
+@section scripts {
+
+<!-- Events -->
+@{Html.RenderPartial("_Events");}
+
+}
+

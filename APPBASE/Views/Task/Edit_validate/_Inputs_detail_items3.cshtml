@@ -1,0 +1,59 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-hover">
+    <tr>
+        <th class="bg-greenx centerx" colspan="2">Validasi</th>
+    </tr>
+    <tr>
+        <th style="width:20%;">Validasi</th>
+        <td style="width:80%;">
+            <div class="row">
+                <div class="col-sm-12">
+                    @if (ViewData.ModelState["TASKD_VALIDATESTS0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+                        <select id="TASKD_VALIDATESTS" name="TASKD_VALIDATESTS" class="form-control select2" data-placeholder="" style="width: 100%;" @vsReadonlyTextbox>
+                            <option selected value=""></option>
+                            @foreach (var item in ViewBag.VALIDATESTS)
+                            {
+
+                                if (Model.TASKD_VALIDATESTS == item.ID) {<option selected value="@item.ID">@item.VALIDATESTS_SHORTDESC</option> }
+                                else {<option value="@item.ID">@item.VALIDATESTS_SHORTDESC</option> }
+                            }
+                        </select>
+
+                        @if (ViewData.ModelState["TASKD_VALIDATESTS1"] != null)
+                        {
+                                <label class="control-label" for="inputError">
+                                <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_VALIDATESTS1")
+                                </label>
+                        }
+                        @if (ViewData.ModelState["TASKD_VALIDATESTS2"] != null)
+                        {
+                                <label class="control-label" for="inputError">
+                                <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_VALIDATESTS2")
+                                </label>
+                        }
+                </div> <!-- col -->
+            </div> <!-- row -->
+        </td>
+    </tr>
+    <tr>
+        <th>Keterangan</th>
+        <td>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="text" id="TASKD_VALIDATENOTES" name="TASKD_VALIDATENOTES" value="@Html.DisplayFor(model => model.TASKD_VALIDATENOTES)" class="form-control" maxlength = "100" @vsReadonlyTextbox />
+                </div>
+            </div>
+        </td>
+    </tr>
+</table> <!-- table -->

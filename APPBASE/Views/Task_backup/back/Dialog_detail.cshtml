@@ -1,0 +1,18 @@
+﻿@using APPBASE.Helpers
+
+<!-- Modal -->
+<div class="modal fade" id="DialogAddDetail" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            @if (hlpConfig.SessionInfo.getAppRoleId() == 1) { <span>Tambah Tugas</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == 2) { <span>Tambah Tugas</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == 3) { <span>Validasi</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == 4) { <span>Progress</span> }
+        </h5>
+      </div> <!-- end modal-header -->
+        @{Html.RenderPartial("Dialog_detail_items");}
+    </div>
+  </div>
+</div>

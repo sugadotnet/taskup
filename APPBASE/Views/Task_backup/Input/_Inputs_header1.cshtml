@@ -1,0 +1,50 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+@if (ViewData.ModelState["RES_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="RES_ID">Nama</label>
+        <select id="RES_ID" name="RES_ID" class="form-control select2" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.EMPLOYEE)
+            {
+
+                if (Model.RES_ID == item.ID) {<option selected value="@item.ID">@item.NAME</option> }
+                else {<option value="@item.ID">@item.NAME</option> }
+            }
+        </select>
+
+    @if (ViewData.ModelState["RES_ID1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RES_ID1")
+            </label>
+    }
+    @if (ViewData.ModelState["RES_ID2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RES_ID2")
+            </label>    
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["RES_JOBTITLESHORTDESC0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="RES_JOBTITLESHORTDESC">Jabatan</label>
+    <input type="text" id="RES_JOBTITLESHORTDESC" name="RES_JOBTITLESHORTDESC" value="@Html.DisplayFor(model => model.RES_JOBTITLESHORTDESC)" class="form-control" maxlength = "100" readonly />
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["UNIT_SHORTDESC0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="UNIT_SHORTDESC">Bagian</label>
+    <input type="text" id="UNIT_SHORTDESC" name="UNIT_SHORTDESC" value="@Html.DisplayFor(model => model.UNIT_SHORTDESC)" class="form-control" maxlength = "100" @vsReadonlyTextbox readonly />
+</div> <!-- /.form-group -->

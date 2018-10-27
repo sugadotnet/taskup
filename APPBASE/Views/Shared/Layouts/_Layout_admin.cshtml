@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Appname = "Aplikasi Agenda " + hlpConfig.SessionInfo.getAppVer();
+}
+
+@using APPBASE.Helpers
+@using APPBASE.Svcutil
+@using APPBASE.Svcapp
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @{Html.RenderPartial("~/Views/Shared/Layouts/_PartialHead.cshtml");}
+        @RenderSection("includeTOP", required: false)
+    </head>
+    <body class="skin-blue">
+        
+        <!-- Untuk keperluan setting selected menu -->
+        <input type="hidden" id="menuActive" value="@Url.RequestContext.HttpContext.Request.RawUrl" />
+
+        <!-- header logo: style can be found in header.less -->
+        <header class="header">
+        
+            <a href="@Url.Action("Index", "Home")" class="logo" style="padding:0 10px 0 10px; background-color:White;">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                <img style="height:90%; margin-bottom:5px;" src="@Url.Content("~/")Images/Company_logonav.png" alt="@ViewBag.Appname" />
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="@Url.Action("Index", "Home")">
+                                <i class="fa fa-home"></i>
+                            </a>
+                        </li>
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="glyphicon glyphicon-user"></i>
+                                <span>
+                                @if ((hlpConfig.SessionInfo.getAppUserdisplayname() != "") && (hlpConfig.SessionInfo.getAppUserdisplayname() != null))
+                                {
+                                    @hlpConfig.SessionInfo.getAppUserdisplayname()
+                                }
+                                else
+                                {
+                                    @hlpConfig.SessionInfo.getAppUserdisplayname()
+                                } <i class="caret"></i>
+                                
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header bg-blue">
+                                    <img src="@Url.Content("~/")@Utility_FileUploadDownload.getImage_User()" class="img-circle" alt="Foto User" />    
+                                        @if ((hlpConfig.SessionInfo.getAppUserdisplayname() != ""))
+                                        {
+                                            <p>
+                                                @hlpConfig.SessionInfo.getAppUserdisplayname()
+                                                <small></small>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                @hlpConfig.SessionInfo.getAppUsername()
+                                            </p>
+                                        }
+                                                                                
+
+
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="@Url.Action("Changepassword", "User", new { id = hlpConfig.SessionInfo.getAppUserId() })" class="btn btn-default btn-flat">Change Password</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="@Url.Action("LogOff", "Account")" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="left-side sidebar-offcanvas">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    @{Html.RenderPartial("_PartialMenu");}
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Right side column. Contains the navbar and content of the page -->
+            <aside class="right-side">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                    <h1>
+                        @RenderSection("TitleIcon", required: false) @ViewBag.Title
+                    </h1>
+                </section>
+
+                <!-- Main content -->
+                <section class="content @ViewBag.Print">
+                    @RenderBody()
+                </section><!-- /.content -->
+            </aside><!-- /.right-side -->
+        </div><!-- ./wrapper -->
+
+        @{Html.RenderPartial("~/Views/Shared/Layouts/_PartialJSVAR.cshtml");}
+        @{Html.RenderPartial("~/Views/Shared/Layouts/_PartialScript1.cshtml");}
+
+        @RenderSection("includeBOTTOM", required: false)
+        
+        @{Html.RenderPartial("~/Views/Shared/Layouts/_PartialScript2.cshtml");}
+        @RenderSection("scripts", required: false)
+
+
+    </body>
+</html>

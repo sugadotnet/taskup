@@ -1,0 +1,25 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+
+ID: <input type="text" name="ID" />
+<br />
+Status : <select name="TASKD_VALIDATESTS" class="select2" style="width: 100%;" >
+    <option selected value=""></option>
+    <option value="1">Luar Biasa</option>
+    <option value="2">Memuaskan</option>
+    <option value="3">Memenuhi Harapan</option>
+    <option value="4">Kurang</option>
+    <option value="5">Tidak Sesuai Harapan</option>
+</select>
+<br />
+Notes: <input type="text" name="TASKD_VALIDATENOTES" />

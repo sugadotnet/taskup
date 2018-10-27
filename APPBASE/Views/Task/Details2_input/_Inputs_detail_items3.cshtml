@@ -1,0 +1,25 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-hover">
+    <tr>
+        <th class="bg-greenx centerx" colspan="2">Validasi</th>
+    </tr>
+    <tr>
+        <th style="width:20%;">Validasi</th>
+        <td style="width:80%;">: @Html.DisplayFor(modelItem => modelItem.VALIDATESTS_SHORTDESC)</td>
+    </tr>
+    <tr>
+        <th>Keterangan</th>
+        <td>: @Html.DisplayFor(modelItem => modelItem.TASKD_VALIDATENOTES)</td>
+    </tr>
+</table> <!-- table -->

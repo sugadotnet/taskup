@@ -1,0 +1,20 @@
+﻿@model IEnumerable<APPBASE.Models.TaskVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+@using APPBASE.Svcutil
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <a href="@Url.Action("Details", new { id = item.ID })">
+                <img class="img-circle" id="imgEMPLOYEE_IMG" src="@Url.Content("~/")@Utility_FileUploadDownload.getImage_Employee(item.RES_EMPLOYEE_IMG)" alt="Foto" />
+            </a>
+        </td>
+        <td class="SEARCHABLE_ROWS">
+            <div><span class="badge badge-default">@Html.DisplayFor(modelItem => item.MONTH_SHORTDESC) @Html.DisplayFor(modelItem => item.YEAR_DESC)</span></div>
+            <h4>@Html.DisplayFor(modelItem => item.RES_NAME)</h4>
+            <div>@Html.DisplayFor(modelItem => item.UNIT_SHORTDESC) - @Html.DisplayFor(modelItem => item.RES_JOBTITLESHORTDESC)</div>
+        </td>
+    </tr>
+}

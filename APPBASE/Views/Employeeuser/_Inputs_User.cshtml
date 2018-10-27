@@ -1,0 +1,95 @@
+﻿@model APPBASE.Models.EmployeeuserVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+@if (ViewData.ModelState["EMPUSER_ROLEID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="EMPUSER_ROLEID">Hak Akses</label>
+        <select id="EMPUSER_ROLEID" name="EMPUSER_ROLEID" class="form-control select2" data-placeholder="Select EMPUSER_ROLEID" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.ROLE)
+            {
+
+                if (Model.EMPUSER_ROLEID == item.ID) {<option selected value="@item.ID">@item.DISPLAY_NAME</option> }
+                else {<option value="@item.ID">@item.DISPLAY_NAME</option> }
+            }
+        </select>
+
+    @if (ViewData.ModelState["EMPUSER_ROLEID1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_ROLEID1")
+            </label>
+    }
+    @if (ViewData.ModelState["EMPUSER_ROLEID2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_ROLEID2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["EMPUSER_USERNAME0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="EMPUSER_USERNAME">Username</label>
+    <input type="text" id="EMPUSER_USERNAME" name="EMPUSER_USERNAME" value="@Html.DisplayFor(model => model.EMPUSER_USERNAME)" class="form-control" maxlength = "30" @vsReadonlyTextbox />
+
+    @if (ViewData.ModelState["EMPUSER_USERNAME1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_USERNAME1")
+            </label>
+    }
+    @if (ViewData.ModelState["EMPUSER_USERNAME2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_USERNAME2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["EMPUSER_PASSWORD0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="EMPUSER_PASSWORD">Password</label>
+    <input type="password" id="EMPUSER_PASSWORD" name="EMPUSER_PASSWORD" class="form-control" maxlength = "30" @vsReadonlyTextbox />
+
+    @if (ViewData.ModelState["EMPUSER_PASSWORD1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_PASSWORD1")
+            </label>
+    }
+    @if (ViewData.ModelState["EMPUSER_PASSWORD2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_PASSWORD2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["EMPUSER_EMAIL0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="EMPUSER_EMAIL">Email</label>
+    <input type="text" id="EMPUSER_EMAIL" name="EMPUSER_EMAIL" value="@Html.DisplayFor(model => model.EMPUSER_EMAIL)" class="form-control" maxlength = "30" @vsReadonlyTextbox />
+
+    @if (ViewData.ModelState["EMPUSER_EMAIL1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_EMAIL1")
+            </label>
+    }
+    @if (ViewData.ModelState["EMPUSER_EMAIL2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_EMAIL2")
+            </label>
+    }
+</div> <!-- /.form-group -->

@@ -1,0 +1,7 @@
+﻿<script type="text/javascript">
+    //Set Active Menu
+    var menuitem = $("#" + $("a[href$='" + $("#menuActive").val() + "']").attr("id"));
+    menuitem.parent("li").parent("ul.treeview-menu").parent("li.treeview").addClass("active");
+    menuitem.parent("li").addClass("active");
+    $(".sidebar .treeview").tree();
+</script>

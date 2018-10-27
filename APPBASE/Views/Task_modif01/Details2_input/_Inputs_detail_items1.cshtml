@@ -1,0 +1,41 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-hover">
+    <tr>
+        <th class="bg-greenx centerx" colspan="2">Rencana</th>
+    </tr>
+    <tr>
+        <th style="width:40%;">Project</th>
+        <td style="width:60%;">: @Html.DisplayFor(modelItem => modelItem.PROJECT_SHORTDESC)</td>
+    </tr>
+    <tr>
+        <th>Uraian Pekerjaan</th>
+        <td>: @Html.DisplayFor(modelItem => modelItem.TASKD_PLANDESC)</td>
+    </tr>
+    <tr>
+        <th>Pemberi Tugas</th>
+        <td>: @Html.DisplayFor(modelItem => modelItem.ASSIGNEE_NAME)</td>
+    </tr>
+    <tr>
+        <th>Tgl. Mulai</th>
+        <td>: @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PLANSTARTDT)</td>
+    </tr>
+    <tr>
+        <th>Durasi</th>
+        <td>: @Html.DisplayFor(modelItem => modelItem.TASKD_PLANDURATION)</td>
+    </tr>
+    <tr>
+        <th>Tgl. Selesai</th>
+        <td>: @hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PLANENDDT)</td>
+    </tr>
+</table> <!-- table -->

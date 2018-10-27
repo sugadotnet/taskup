@@ -1,0 +1,43 @@
+﻿@model APPBASE.Models.EmployeeuserVM
+@using APPBASE.Helpers
+@using APPBASE.Svcutil
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+@if (Model != null)
+{
+    <img id="imgEMPUSER_USERIMG" src="@Url.Content("~/")@Utility_FileUploadDownload.getImage_User(Model.EMPUSER_USERIMG)" class="img-thumbnail" alt="Foto" />
+}
+else
+{
+    <img id="imgEMPUSER_USERIMG" src="@Url.Content("~/")@Utility_FileUploadDownload.getImage_UserNA()" class="img-thumbnail" alt="Foto" />
+}
+@if (ViewData.ModelState["EMPUSER_USERIMG0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = "has-error"; }
+<div class="form-group @vsErrClass">
+    @Html.HiddenFor(model => model.EMPUSER_USERIMG)
+    @if (ViewData.ModelState["EMPUSER_USERIMG1"] != null)
+    {
+        <label class="control-label" for="inputError">
+        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_USERIMG1")
+        </label>
+    }
+    @if (ViewData.ModelState["EMPUSER_USERIMG2"] != null)
+    {
+        <label class="control-label" for="inputError">
+        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMPUSER_USERIMG2")
+        </label>
+    }
+</div>
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE)||(ViewBag.CRUD_type == hlpFlags_CRUDOption.UPDATE)) {
+    <!-- Upload Photo btn -->
+    <button type="button" id="cmdEMPUSER_USERIMG" name="cmdEMPUSER_USERIMG" class="btn btn-primary btn-flat btn-block" style="margin-top:2px;">Upload Photo</button>
+}
+<span id="FileContainerEMPUSER_USERIMG"><input type="file" id="FileEMPUSER_USERIMG" name="FileEMPUSER_USERIMG" accept="image/*; capture=camera" /></span>
+

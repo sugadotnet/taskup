@@ -1,0 +1,34 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+@if (ViewData.ModelState["RESBOS_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="RESBOS_ID">Atasan Langsung</label>
+    <div class="form-control">@Html.DisplayFor(modelitem=>modelitem.RESBOS_NAME)</div>
+</div> <!-- /.form-group -->
+
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="form-group @vsErrClass">
+            <label for="MONTH_ID">Bulan</label>
+            <div class="form-control">@Html.DisplayFor(modelitem=>modelitem.MONTH_DESC)</div>
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-sm-6 -->
+
+    <div class="col-sm-4">
+        <div class="form-group @vsErrClass">
+            <label for="YEAR_ID">Tahun</label>
+            <div class="form-control">@Html.DisplayFor(modelitem=>modelitem.YEAR_DESC)</div>
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-sm-6 -->
+</div><!-- /.row -->

@@ -1,0 +1,69 @@
+﻿<script type="text/javascript">
+
+    //Closure to prevent global variable in javascript
+    (function () {
+        /*====================== jQuery syntax ======================*/
+        $("[data-mask]").inputmask(); //Optional if contains date field(s)
+        //inputIntegerPct();
+        $(".select2").select2();
+        /*====================== vanilla syntax ======================*/
+        //Init Field Object
+        jsVanila.inputMaskIntegerPct();
+        var data = JSON.parse(document.getElementById("JSON_PROGRESSSTS").value);
+        //Chache Elements
+        var progressPct = document.getElementById("TASKD_PROGRESSPCT");
+        var planDate = document.getElementById("TASKD_PLANENDDT");
+        var progressDate = document.getElementById("TASKD_PROGRESSDT");
+        //Set Evenet Listener
+        progressPct.addEventListener("blur", function () { setProgressDate(progressDate, this); });
+        progressDate.addEventListener("blur", function () { getProgressSts(planDate, this); });
+
+        //Function
+        function setProgressDate(progressDate, progressPct) {
+            if (progressPct.value === '') {
+                //Disable progressDate
+                progressDate.value = "";
+                progressDate.disabled = true;
+            } else {
+                if (progressPct.value >= 100) {
+                    //Enable progressDate
+                    progressDate.disabled = false;
+                    progressDate.focus();
+                } else {
+                    //Disable progressDate
+                    progressDate.value = "";
+                    progressDate.disabled = true;
+                } //end if
+            } //end if
+        } //end function
+
+        //Functions
+        function getProgressSts(planDate, progressDate) {
+            if ((planDate.value != '') && (progressDate.value != '')) {
+                var plan = jsVanila.convertStringDateShortToISO(planDate.value);
+                var progress = jsVanila.convertStringDateShortToISO(progressDate.value);
+                var dPlan = new Date(plan);
+                var dprogress = new Date(progress);
+                var elId = document.getElementById("TASKD_PROGRESSSTS");
+                var elDesc = document.getElementById("PROGRESSSTS_SHORTDESC");
+
+                //LATE
+                if (dPlan < dprogress) {
+                    elId.value = data.result[0].ID;
+                    elDesc.innerHTML = '<span style="color:#F56954;">' + data.result[0].PROGRESSSTS_SHORTDESC + '</span>';
+                }
+                //ONTIME
+                if (dPlan.getTime() === dprogress.getTime()) {
+                    elId.value = data.result[1].ID;
+                    elDesc.innerHTML = '<span style="color:#00A65A;">' + data.result[1].PROGRESSSTS_SHORTDESC + '</span>';
+                }
+                //FAST
+                if (dPlan > dprogress) {
+                    elId.value = data.result[2].ID;
+                    elDesc.innerHTML = '<span style="color:#F39C12;">' + data.result[2].PROGRESSSTS_SHORTDESC + '</span>';
+                }
+            } //End if
+        } //end function
+    })();       //end function closure
+</script>
+

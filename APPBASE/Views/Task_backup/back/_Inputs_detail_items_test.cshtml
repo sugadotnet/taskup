@@ -1,0 +1,64 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+    <tr>
+        <td>
+            DTA_STS: <input type="text" name="DETAIL[0].DTA_STS" value="1"/><br />
+            ID: <input type="text" name="DETAIL[0].ID" value="35" /><br />
+            <input type="text" name="DETAIL[0].ASSIGNEE_ID" value="0" />
+        </td>
+        <td><input type="text" name="DETAIL[0].TASKD_PLANDESC" value="Uraian 0" /></td>
+        <td>
+            Tanggal Mulai : <input type="text" name="DETAIL[0].TASKD_PLANSTARTDT" data-inputmask="@vsDateFormat" data-mask />
+            <br />
+            Durasi : <input type="text" name="DETAIL[0].TASKD_PLANDURATION" class="data-mask-integer" />
+        </td>
+        <td>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_progress", new { id = 36})'" class="btn btn-lg btn-warning" style="height: 48px; width:48px;"><i class="fa fa-pencil"></i></button>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_validate", new { id = 36 })'" class="btn btn-lg btn-success" style="height: 48px; width:48px;"><i class="fa fa-edit"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            DTA_STS: <input type="text" name="DETAIL[1].DTA_STS" value="1"/><br />
+            ID: <input type="text" name="DETAIL[1].ID" value="36" /><br />
+            <input type="text" name="DETAIL[1].ASSIGNEE_ID" value="1" />
+        </td>
+        <td><input type="text" name="DETAIL[1].TASKD_PLANDESC" value="Uraian 1" /></td>
+        <td>
+            Tanggal Mulai : <input type="text" name="DETAIL[1].TASKD_PLANSTARTDT" data-inputmask="@vsDateFormat" data-mask />
+            <br />
+            Durasi : <input type="text" name="DETAIL[1].TASKD_PLANDURATION" class="data-mask-integer" />
+        </td>
+        <td>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_progress", new { id = 36 })'" class="btn btn-lg btn-warning" style="height: 48px; width:48px;"><i class="fa fa-pencil"></i></button>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_validate", new { id = 36 })'" class="btn btn-lg btn-success" style="height: 48px; width:48px;"><i class="fa fa-edit"></i></button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            DTA_STS: <input type="text" name="DETAIL[2].DTA_STS" value="1"/><br />
+            ID: <input type="text" name="DETAIL[2].ID" value="37" /><br />
+            <input type="text" name="DETAIL[2].ASSIGNEE_ID" value="2" />
+        </td>
+        <td><input type="text" name="DETAIL[2].TASKD_PLANDESC" value="Uraian 2" /></td>
+        <td>
+            Tanggal Mulai : <input type="text" name="DETAIL[2].TASKD_PLANSTARTDT" data-inputmask="@vsDateFormat" data-mask />
+            <br />
+            Durasi : <input type="text" name="DETAIL[2].TASKD_PLANDURATION" class="data-mask-integer" />
+        </td>
+        <td>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_progress", new { id = 36 })'" class="btn btn-lg btn-warning" style="height: 48px; width:48px;"><i class="fa fa-pencil"></i></button>
+            <button type="button" onclick="window.location.href='@Url.Action("Edit_validate", new { id = 36 })'" class="btn btn-lg btn-success" style="height: 48px; width:48px;"><i class="fa fa-edit"></i></button>
+        </td>
+    </tr>
+

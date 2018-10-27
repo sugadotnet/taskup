@@ -1,0 +1,49 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@{
+    //ViewBag.Title = "Tambah data " + ViewContext.RouteData.Values["controller"] + "/" + ViewContext.RouteData.Values["action"];
+    ViewBag.Title = "Cetak Agenda Bulanan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section includeBOTTOM {
+    @Scripts.Render("~/bundles/JSInputMask")
+}
+
+@if (ViewBag.DataNotFound == valFLAG.FLAG_TRUE) {
+      Html.RenderPartial("_PartialConfirmDataNotFound"); 
+}
+
+
+@using (Html.BeginForm())
+{
+
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @{Html.RenderPartial("Filter_admin_input");}
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-primary btn-flat">Cetak</button>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
+    
+}
+
+<!-- Modal -->
+@{Html.RenderPartial("_PartialDialogLookup");}
+
+
+@section scripts {
+
+<!-- Modal -->
+@{Html.RenderPartial("_Events");}
+
+}

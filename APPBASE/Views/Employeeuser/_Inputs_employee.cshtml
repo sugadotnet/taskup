@@ -1,0 +1,112 @@
+﻿@model APPBASE.Models.EmployeeuserVM
+@using APPBASE.Helpers
+@using APPBASE.Svcutil
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+@if (ViewData.ModelState["NAME0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="NAME">Nama Karyawan</label>
+    <input type="text" id="NAME" name="NAME" value="@Html.DisplayFor(model => model.NAME)" class="form-control" maxlength = "60" @vsReadonlyTextbox />
+
+    @if (ViewData.ModelState["NAME1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("NAME1")
+            </label>
+    }
+    @if (ViewData.ModelState["NAME2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("NAME2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["UNIT_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="UNIT_ID">Unit Kerja</label>
+        <select id="UNIT_ID" name="UNIT_ID" class="form-control select2" data-placeholder="Select UNIT_ID" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.UNIT)
+            {
+
+                if (Model.UNIT_ID == item.ID) {<option selected value="@item.ID">@item.UNIT_SHORTDESC</option> }
+                else {<option value="@item.ID">@item.UNIT_SHORTDESC</option> }
+            }
+        </select>
+
+    @if (ViewData.ModelState["UNIT_ID1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("UNIT_ID1")
+            </label>
+    }
+    @if (ViewData.ModelState["UNIT_ID2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("UNIT_ID2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["JOBTITLE_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="JOBTITLE_ID">Jabatan</label>
+        <select id="JOBTITLE_ID" name="JOBTITLE_ID" class="form-control select2" data-placeholder="Select JOBTITLE_ID" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.JOBTITLE)
+            {
+
+                if (Model.JOBTITLE_ID == item.ID) {<option selected value="@item.ID">@item.JOBTITLE_SHORTDESC</option> }
+                else {<option value="@item.ID">@item.JOBTITLE_SHORTDESC</option> }
+            }
+        </select>
+
+    @if (ViewData.ModelState["JOBTITLE_ID1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("JOBTITLE_ID1")
+            </label>
+    }
+    @if (ViewData.ModelState["JOBTITLE_ID2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("JOBTITLE_ID2")
+            </label>
+    }
+</div> <!-- /.form-group -->
+
+@if (ViewData.ModelState["SUPERIOR_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+<div class="form-group @vsErrClass">
+    <label for="SUPERIOR_ID">Atasan Langsung</label>
+        <select id="SUPERIOR_ID" name="SUPERIOR_ID" class="form-control select2" data-placeholder="Select SUPERIOR_ID" style="width: 100%;" @vsReadonlyTextbox>
+            <option selected value=""></option>
+            @foreach (var item in ViewBag.EMPLOYEE)
+            {
+
+                if (Model.SUPERIOR_ID == item.ID) {<option selected value="@item.ID">@item.NAME</option> }
+                else {<option value="@item.ID">@item.NAME</option> }
+            }
+        </select>
+
+    @if (ViewData.ModelState["SUPERIOR_ID1"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("SUPERIOR_ID1")
+            </label>
+    }
+    @if (ViewData.ModelState["SUPERIOR_ID2"] != null)
+    {
+            <label class="control-label" for="inputError">
+            <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("SUPERIOR_ID2")
+            </label>
+    }
+</div> <!-- /.form-group -->

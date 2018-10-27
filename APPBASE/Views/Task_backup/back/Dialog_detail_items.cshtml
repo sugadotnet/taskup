@@ -1,0 +1,13 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+<!-- master -->
+@if (hlpConfig.SessionInfo.getAppRoleId() == 1) { Html.RenderPartial("Dialog_detail_items_progress"); }
+<!-- admin -->
+@if (hlpConfig.SessionInfo.getAppRoleId() == 2) { Html.RenderPartial("Dialog_detail_items_admin"); }
+<!-- manager -->
+@if (hlpConfig.SessionInfo.getAppRoleId() == 3) { Html.RenderPartial("Dialog_detail_items_validate"); }
+<!-- member -->
+@if (hlpConfig.SessionInfo.getAppRoleId() == 4) { Html.RenderPartial("Dialog_detail_items_progress"); }
+
+

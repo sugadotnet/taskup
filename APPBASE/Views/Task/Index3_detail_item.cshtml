@@ -1,0 +1,23 @@
+﻿@model IEnumerable<APPBASE.Models.TaskdVM>
+@using APPBASE.Helpers
+@using APPBASE.Svcapp
+@using APPBASE.Svcutil
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@Html.DisplayFor(modelitem=> item.ASSIGNEE_NAME)</td>
+        <td>@Html.DisplayFor(modelitem=> item.RES_NAME)</td>
+        <td>@Html.DisplayFor(modelitem => item.PROJECT_SHORTDESC)</td>
+        <td>@Html.DisplayFor(modelitem => item.TASKD_PLANDESC)</td>
+        <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANSTARTDT)</td>
+        <td>@Html.DisplayFor(modelitem => item.TASKD_PLANDURATION) Hari</td>
+        <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANENDDT)</td>
+        <td>@Html.DisplayFor(modelitem => item.TASKD_PROGRESSPCT)%</td>
+        <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PROGRESSFINISHDT)</td>
+        <td>@Html.DisplayFor(modelitem => item.PROGRESSSTS_SHORTDESC)</td>
+        <td>@Html.DisplayFor(modelitem => item.TASKD_PROGRESSNOTES)</td>
+        <td>@Html.DisplayFor(modelitem => item.VALIDATESTS_SHORTDESC)</td>
+        <td>@Html.DisplayFor(modelitem => item.TASKD_VALIDATENOTES)</td>
+    </tr>    
+}

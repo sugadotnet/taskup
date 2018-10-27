@@ -1,0 +1,96 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["RESBOS_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="RESBOS_ID">Atasan Langsung</label>
+            <input type="hidden" id="RESBOS_ID" name="RESBOS_ID" value="@Html.DisplayFor(model => model.RESBOS_ID)"/>
+            <input type="text" id="RESBOS_NAME" name="RESBOS_NAME" value="@Html.DisplayFor(model => model.RESBOS_NAME)" class="form-control data-mask-integer"  readonly />
+
+            @if (ViewData.ModelState["RESBOS_ID1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RESBOS_ID1")
+                    </label>
+            }
+            @if (ViewData.ModelState["RESBOS_ID2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("RESBOS_ID2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+
+
+<div class="row">
+    <div class="col-sm-8">
+        @if (ViewData.ModelState["MONTH_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="MONTH_ID">Bulan</label>
+                <select id="MONTH_ID" name="MONTH_ID" class="form-control select2" style="width: 100%;" @vsReadonlyTextbox>
+                    <option selected value=""></option>
+                    @foreach (var item in ViewBag.MONTH)
+                    {
+
+                        if (Model.MONTH_ID == item.ID) {<option selected value="@item.ID">@item.MONTH_SHORTDESC</option> }
+                        else {<option value="@item.ID">@item.MONTH_SHORTDESC</option> }
+                    }
+                </select>
+
+            @if (ViewData.ModelState["MONTH_ID1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("MONTH_ID1")
+                    </label>
+            }
+            @if (ViewData.ModelState["MONTH_ID2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("MONTH_ID2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-sm-6 -->
+
+    <div class="col-sm-4">
+        @if (ViewData.ModelState["YEAR_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="YEAR_ID">Tahun</label>
+                <select id="YEAR_ID" name="YEAR_ID" class="form-control select2" style="width: 100%;" @vsReadonlyTextbox>
+                    <option selected value=""></option>
+                    @foreach (var item in ViewBag.YEAR)
+                    {
+
+                        if (Model.YEAR_ID == item.ID) {<option selected value="@item.ID">@item.YEAR_SHORTDESC</option> }
+                        else {<option value="@item.ID">@item.YEAR_SHORTDESC</option> }
+                    }
+                </select>
+
+            @if (ViewData.ModelState["YEAR_ID1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("YEAR_ID1")
+                    </label>
+            }
+            @if (ViewData.ModelState["YEAR_ID2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("YEAR_ID2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-sm-6 -->
+</div><!-- /.row -->

@@ -1,0 +1,116 @@
+﻿@model APPBASE.Models.UserdetailVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["ROLE_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="ROLE_ID">Hak Akses *</label>
+                <select id="ROLE_ID" name="ROLE_ID" class="form-control select2" data-placeholder="Pilih Hak Akses" style="width: 100%;" @vsReadonlyTextbox>
+                    <option selected value=""></option>
+                    @foreach (var item in ViewBag.ROLE)
+                    {
+
+                        if (Model.ROLE_ID == item.ID) {<option selected value="@item.ID">@item.DISPLAY_NAME</option> }
+                        else {<option value="@item.ID">@item.DISPLAY_NAME</option> }
+                    }
+                </select>
+
+            @if (ViewData.ModelState["ROLE_ID1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ROLE_ID1")
+                    </label>
+            }
+            @if (ViewData.ModelState["ROLE_ID2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ROLE_ID2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+<div class="row">
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["USERNAME0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="USERNAME">Username *</label>
+            <input type="text" id="USERNAME" name="USERNAME" value="@Html.DisplayFor(model => model.USERNAME)" class="form-control VARCHAR" maxlength = "30" @vsReadonlyTextbox />
+
+            @if (ViewData.ModelState["USERNAME1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("USERNAME1")
+                    </label>
+            }
+            @if (ViewData.ModelState["USERNAME2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("USERNAME2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["PASSWORD0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="PASSWORD">Password *</label>
+            <input type="password" id="PASSWORD" name="PASSWORD" value="@Html.DisplayFor(model => model.PASSWORD)" class="form-control VARCHAR" maxlength = "100" @vsReadonlyTextbox />
+
+            @if (ViewData.ModelState["PASSWORD1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("PASSWORD1")
+                    </label>
+            }
+            @if (ViewData.ModelState["PASSWORD2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("PASSWORD2")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (ViewData.ModelState["EMAIL0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+        <div class="form-group @vsErrClass">
+            <label for="EMAIL">Alamat Email *</label>
+            <input type="text" id="EMAIL" name="EMAIL" value="@Html.DisplayFor(model => model.EMAIL)" class="form-control VARCHAR" maxlength = "30" @vsReadonlyTextbox />
+
+            @if (ViewData.ModelState["EMAIL1"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMAIL1")
+                    </label>
+            }
+            @if (ViewData.ModelState["EMAIL2"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMAIL2")
+                    </label>
+            }
+            @if (ViewData.ModelState["EMAIL3"] != null)
+            {
+                    <label class="control-label" for="inputError">
+                    <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("EMAIL3")
+                    </label>
+            }
+        </div> <!-- /.form-group -->
+    </div> <!-- /.col-xs-12 -->
+</div><!-- /.row -->

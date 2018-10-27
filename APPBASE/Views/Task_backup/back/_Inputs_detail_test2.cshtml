@@ -1,0 +1,63 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+
+<table id="tablex" class="table table-hover table-bordered">
+    <thead>
+        <tr class="bg-greenx">
+            <th></th>
+            <th class="centerx">Pemberi Tugas</th>
+            <th class="centerx">Uraian Pekerjaan</th>
+            <th class="centerx">Tgl. Mulai</th>
+            <th class="centerx">Durasi</th>
+            <th class="centerx">Tgl. Selesai</th>
+            <th class="bg-yellowx centerx">Progress</th>
+            <th class="bg-yellowx centerx">Tgl.Selesai</th>
+            <th class="bg-yellowx centerx">Status</th>
+            <th class="bg-yellowx centerx">Keterangan</th>
+            <th class="centerx">Validasi</th>
+            <th class="centerx">Keterangan</th>
+        </tr>
+    </thead>
+
+    <tbody id="target">
+        @if (Model.DETAIL != null) { Html.RenderPartial("~/Views/Task/Input/_Inputs_detail_items.cshtml"); }
+    
+    @for (int i = 0; i < 3; i++)
+    {
+<tr>
+    <td>
+        <div class="btn-group-vertical">
+            <input type="hidden" tag-id="DTA_STS" id="DETAIL[@i].DTA_STS" name="DETAIL[@i].DTA_STS" />
+            <input type="hidden" tag-id="ID" id="DETAIL[@i].ID" name="DETAIL[@i].ID" />
+            <input type="hidden" tag-id="ASSIGNEE_ID" id="DETAIL[@i].ASSIGNEE_ID" name="DETAIL[@i].ASSIGNEE_ID" />
+            <input type="hidden" tag-id="TASKD_PLANDESC" id="DETAIL[@i].TASKD_PLANDESC" name="DETAIL[@i].TASKD_PLANDESC" />
+            <input type="hidden" tag-id="TASKD_PLANSTARTDT" id="DETAIL[@i].TASKD_PLANSTARTDT" name="DETAIL[@i].TASKD_PLANSTARTDT" />
+            <input type="hidden" tag-id="TASKD_PLANDURATION" id="DETAIL[@i].TASKD_PLANDURATION" name="DETAIL[@i].TASKD_PLANDURATION" />
+            <button id="btnEditRow_@i" type="button" class="btnEditRow btn btn-sm btn-flat btn-warning"><i class="fa fa-pencil"></i></button>
+            <button id="btnDeleteRow_@i" type="button" class="btnDeleteRow btn btn-sm btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+        </div>
+    </td>
+    <td>Suherman @i </td>
+    <td>Perencanaan Disain Artwork</td>
+    <td>09/12/2017</td>
+    <td>250 Hari</td>
+    <td>09/12/2017</td>
+    <td>35%</td>
+    <td>25/12/2017</td>
+    <td>Tepat Waktu</td>
+    <td>Tidak ada kesulitan dalam proses perencanaan</td>
+    <td>Tidak sesuai harapan</td>
+    <td>Lakukan peningkatan dalam proses perencanaan kedepan</td>
+</tr>
+    }
+    </tbody>

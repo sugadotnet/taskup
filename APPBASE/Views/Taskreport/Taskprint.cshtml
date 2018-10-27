@@ -1,0 +1,32 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+@{
+    ViewBag.Title = "Laporan Agenda Bulanan";
+    Layout = "~/Views/Shared/_LayoutPrintable.cshtml";
+}
+
+@section includeTOP {
+    <!-- csslayout -->
+    <link href="@Url.Content("~/")Content/print.css" rel="stylesheet" type="text/css" />
+}
+
+@{Html.RenderPartial("Taskprint_data");}
+
+<br /><br /><br /><br />
+@if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MEMBER)
+{
+    <div class="no-print"><a href="@Url.Action("Index", "Dashboard")" >Selesai</a></div>
+}
+else
+{
+    <div class="no-print"><a href="@Url.Action("Index", "Taskreport")" >Selesai</a></div>
+}
+
+@section scripts {
+
+<script type="text/javascript">
+    window.print();
+</script>
+
+}

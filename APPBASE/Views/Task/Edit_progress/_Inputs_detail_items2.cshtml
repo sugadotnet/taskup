@@ -1,0 +1,71 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+
+<table class="table table-hover">
+    <tr>
+        <th class="bg-yellowx centerx" colspan="2">Progress</th>
+    </tr>
+    <tr>
+        <th style="width:20%;">Progress (%)</th>
+        <td style="width:80%;">
+            <div class="row">
+                <div class="col-sm-6">
+                    <input style="text-align:right;" type="text" id="TASKD_PROGRESSPCT" name="TASKD_PROGRESSPCT" value="@Html.DisplayFor(model => model.TASKD_PROGRESSPCT)" class="form-control data-mask-integer-percentage"  @vsReadonlyTextbox />
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th>Tanggal Selesai</th>
+        <td>
+            <div class="row">
+                <div class="col-sm-6">
+                    
+                    @if (Model.TASKD_PROGRESSPCT == null)
+                    {
+                        <input disabled type="text" id="TASKD_PROGRESSDT" name="TASKD_PROGRESSDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PROGRESSDT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+                    }
+                    else
+                    {
+                        if (Model.TASKD_PROGRESSPCT != 100)
+                        {
+                            <input disabled type="text" id="TASKD_PROGRESSDT" name="TASKD_PROGRESSDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PROGRESSDT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+                        }
+                        else {
+                            <input type="text" id="TASKD_PROGRESSDT" name="TASKD_PROGRESSDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PROGRESSDT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+                        }
+                    }
+                </div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <th>Status</th>
+        <td>
+            <input type="hidden" id="TASKD_PROGRESSSTS" name="TASKD_PROGRESSSTS" value="@Html.DisplayFor(modelitem => modelitem.TASKD_PROGRESSSTS)" />
+            <div id="PROGRESSSTS_SHORTDESC" class="form-control">@Html.DisplayFor(modelitem => modelitem.PROGRESSSTS_SHORTDESC)</div>
+        </td>
+    </tr>
+    <tr>
+        <th>Keterangan</th>
+        <td>
+            <div class="row">
+                <div class="col-sm-12">
+                    <input type="text" id="TASKD_PROGRESSNOTES" name="TASKD_PROGRESSNOTES" value="@Html.DisplayFor(model => model.TASKD_PROGRESSNOTES)" class="form-control" maxlength = "100" @vsReadonlyTextbox />
+                </div>
+            </div>
+        </td>
+    </tr>
+</table> <!-- table -->
+
+<input type="hidden" id="TASKD_PLANENDDT" name="TASKD_PLANENDDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.TASKD_PLANENDDT)" />

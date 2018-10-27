@@ -1,0 +1,19 @@
+﻿@using APPBASE.Helpers
+@using APPBASE.Svcapp
+
+<!-- Modal -->
+<div class="modal fade" id="DialogAddDetail" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+            @if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MASTER) { <span>Tambah Tugas</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_ADMIN) { <span>Tambah Tugas</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_LEADER) { <span>Validasi</span> }
+            @if (hlpConfig.SessionInfo.getAppRoleId() == valROLE.ROLEID_MEMBER) { <span>Progress</span> }
+        </h5>
+      </div> <!-- end modal-header -->
+        @{Html.RenderPartial("~/Views/Task/Dialog/Dialog_detail_items.cshtml");}
+    </div>
+  </div>
+</div>

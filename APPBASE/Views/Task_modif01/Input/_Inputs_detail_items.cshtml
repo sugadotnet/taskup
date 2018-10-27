@@ -1,0 +1,45 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+    
+@for (int i = 0; i < Model.DETAIL.Count - 1; i++)
+{
+<tr>
+    <td>
+        <div class="btn-group-vertical">
+            <input type="text" tag-id="DTA_STS" id="DETAIL[@i].DTA_STS" name="DETAIL[@i].DTA_STS" value="@Model.DETAIL[i].DTA_STS" />
+            <input type="text" tag-id="ID" id="DETAIL[@i].ID" name="DETAIL[@i].ID" value="@Model.DETAIL[i].ID" />
+            <input type="text" tag-id="ASSIGNEE_ID" id="DETAIL[@i].ASSIGNEE_ID" name="DETAIL[@i].ASSIGNEE_ID" value="@Model.DETAIL[i].ASSIGNEE_ID" />
+            <input type="text" tag-id="TASKD_PLANDESC" id="DETAIL[@i].TASKD_PLANDESC" name="DETAIL[@i].TASKD_PLANDESC" value="@Model.DETAIL[i].TASKD_PLANDESC" />
+            <input type="text" tag-id="TASKD_PLANSTARTDT" id="DETAIL[@i].TASKD_PLANSTARTDT" name="DETAIL[@i].TASKD_PLANSTARTDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.DETAIL[i].TASKD_PLANSTARTDT)" />
+            <input type="text" tag-id="TASKD_PLANDURATION" id="DETAIL[@i].TASKD_PLANDURATION" name="DETAIL[@i].TASKD_PLANDURATION" value="@Model.DETAIL[i].TASKD_PLANDURATION" />
+            <input type="text" tag-id="TASKD_PLANENDDT" id="DETAIL[@i].TASKD_PLANENDDT" name="DETAIL[@i].TASKD_PLANENDDT" value="@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.DETAIL[i].TASKD_PLANENDDT)" />
+
+            @if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.UPDATE)) {
+                <button id="btnEditRow_@i" type="button" class="btnEditRow btn btn-sm btn-flat btn-warning"><i class="fa fa-pencil"></i></button>
+                <button id="btnDeleteRow_@i" type="button" class="btnDeleteRow btn btn-sm btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+            }
+        </div>
+    </td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].RES_NAME)</td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].TASKD_PLANDESC)</td>
+    <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.DETAIL[i].TASKD_PLANSTARTDT)</td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].TASKD_PLANDURATION) Hari</td>
+    <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.DETAIL[i].TASKD_PLANENDDT)</td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].TASKD_PROGRESSPCT)%</td>
+    <td>@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(Model.DETAIL[i].TASKD_PROGRESSFINISHDT)</td>
+    <td>Tepat Waktu</td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].TASKD_PROGRESSNOTES)</td>
+    <td>Tidak sesuai harapan</td>
+    <td>@Html.DisplayFor(modelitem => modelitem.DETAIL[i].TASKD_VALIDATENOTES)</td>
+</tr>
+}
+

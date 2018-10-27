@@ -1,0 +1,26 @@
+﻿<script type="text/javascript">
+
+    //Closure to prevent global variable in javascript
+    (function () {
+        /*====================== jQuery syntax ======================*/
+        $RES_ID = $("#RES_ID");
+        $RES_ID.select2();
+        var $DialogModal = $("#DialogAddDetail");
+
+        /*====================== vanilla syntax ======================*/
+        var RES_ID = document.getElementById("RES_ID");
+
+        //Event Listener Field Changed
+        if (RES_ID != null) { RES_ID.onchange = eventChangeResId; }
+        function eventChangeResId() {
+            var elSelector = [];
+//            elSelector.push({ source: "JOBTITLE_SHORTDESC", target: "RES_JOBTITLESHORTDESC" });
+//            elSelector.push({ source: "UNIT_SHORTDESC", target: "UNIT_SHORTDESC" });
+//            elSelector.push({ source: "SUPERIOR_ID", target: "RESBOS_ID" });
+//            elSelector.push({ source: "SUPERIOR_NAME", target: "RESBOS_NAME" });
+//            vsUrl = BaseUrl + "Employee/getData/" + this.value;
+//            jsVanila.displayLookUpResult(vsUrl, elSelector);
+        } //end event method
+    })();                     //end function closure
+</script>
+

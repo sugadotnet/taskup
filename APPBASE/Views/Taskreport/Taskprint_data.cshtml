@@ -1,0 +1,96 @@
+﻿@model APPBASE.Models.TaskVM
+
+@using APPBASE.Helpers
+@using APPBASE.Svcutil
+@using APPBASE.Svcapp
+@{int nNO = 0;}
+
+<!-- title Table -->
+<table width="700pt">
+<!-- title row -->
+    <tr class="title">
+        <td colspan="3" style="text-align:center;">
+            <div>AGENDA BULANAN</div>
+        </td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+<!-- header row -->
+    <tr>
+        <td style="width:100pt;">Nama</td>
+        <td style="width:600pt;">: @Html.DisplayFor(modelitem=> modelitem.RES_NAME)</td>
+    </tr>
+    <tr>
+        <td>Jabatan</td>
+        <td>: @Html.DisplayFor(modelitem=> modelitem.RES_JOBTITLESHORTDESC)</td>
+    </tr>
+    <tr>
+        <td>Bagian</td>
+        <td>: @Html.DisplayFor(modelitem=> modelitem.RES_UNITSHORTDESC)</td>
+    </tr>
+    <tr>
+        <td>Atasan Langsung</td>
+        <td>: @Html.DisplayFor(modelitem=> modelitem.RESBOS_NAME)</td>
+    </tr>
+    <tr><td colspan="3">&nbsp;</td></tr>
+</table> <!-- end table -->
+
+<!-- content table -->
+<table width="700pt" class="table-bordered">
+<!-- Header -->
+    <tr>
+        <td class="centerx">No</td>
+        <td class="centerx">Pemberi Tugas</td>
+        <td class="centerx">Project</td>
+        <td class="centerx">Uraian Pekerjaan</td>
+        <td class="centerx">Tgl. Mulai</td>
+        <td class="centerx">Durasi</td>
+        <td class="centerx">Tgl. Selesai</td>
+        <td class="centerx">Progress</td>
+        <td class="centerx">Tgl.Selesai</td>
+        <td class="centerx">Status</td>
+        <td class="centerx">Keterangan</td>
+        <td class="centerx">Validasi</td>
+        <td class="centerx">Keterangan</td>
+    </tr>
+<!-- Data -->
+    @if (Model.DETAIL == null) {
+        <tr>
+            <td>@{Html.RenderPartial("_PartialEmpty");}</td>
+        </tr>
+    }
+    @foreach (var item in Model.DETAIL)
+    {
+        nNO++;
+        <tr>
+            <td class="rightx">@nNO</td>
+            <td>@Html.DisplayFor(modelitem=> item.ASSIGNEE_NAME)</td>
+            <td>@Html.DisplayFor(modelitem=> item.PROJECT_SHORTDESC)</td>
+            <td>@Html.DisplayFor(modelitem=> item.TASK_DESC)</td>
+            <td class="centerx">@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANSTARTDT)</td>
+            <td class="centerx">@Html.DisplayFor(modelitem=> item.TASKD_PLANDURATION)</td>
+            <td class="centerx">@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PLANENDDT)</td>
+            <td class="centerx">@Html.DisplayFor(modelitem=> item.TASKD_PROGRESSPCT)%</td>
+            <td class="centerx">@hlpConvertionAndFormating.ConvertDateToStringDateShortFmt(item.TASKD_PROGRESSFINISHDT)</td>
+            <td class="centerx">@Html.DisplayFor(modelitem => item.PROGRESSSTS_SHORTDESC)</td>
+            <td>@Html.DisplayFor(modelitem => item.TASKD_PROGRESSNOTES)</td>
+            <td class="centerx">@Html.DisplayFor(modelitem => item.VALIDATESTS_SHORTDESC)</td>
+            <td>@Html.DisplayFor(modelitem => item.TASKD_VALIDATENOTES)</td>
+        </tr>
+    }
+</table> <!-- end table -->
+<br />
+<!-- Footer -->
+<table width="700pt">
+    <tr><td style="width: 430pt;"></td><td>Jakarta, @hlpConvertionAndFormating.ConvertDateToStringMMMFmt(DateTime.Now.Date)</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td>Atasan Langsung,</td><td>Dibuat oleh,</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+
+    <tr><td>@Html.DisplayFor(model => model.RESBOS_NAME)</td><td>@Html.DisplayFor(model => model.RES_NAME)</td></tr>
+    <tr><td colspan="2">&nbsp;</td></tr>
+    <tr><td colspan="2" style="padding-left:0pt; font-style: italic;"></td></tr>
+</table> <!-- end table -->
+

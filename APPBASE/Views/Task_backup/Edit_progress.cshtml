@@ -1,0 +1,45 @@
+﻿@model APPBASE.Models.TaskdVM
+@using APPBASE.Helpers
+
+@{
+    ViewBag.Title = "Update Progress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section includeBOTTOM {
+    @Scripts.Render("~/bundles/JSInputMask")
+}
+
+@using (Html.BeginForm())
+{
+
+@Html.HiddenFor(model => model.ID)
+<input type="hidden" id="JSON_PROGRESSSTS" value="@ViewBag.JSON_PROGRESSSTS" />
+    
+<div class="box box-info">
+    <div class="box-header">
+        <h3 class="box-title"></h3>
+    </div><!-- /.box-header -->
+    <div class="box-body">
+        @{Html.RenderPartial("~/Views/Task/Edit_progress/_Inputs.cshtml");}
+    </div><!-- /.box-body -->
+    <div class="box-footer">
+        <div class="row">
+            <div class="col-xs-12">
+                <button type="submit" class="btn btn-primary btn-flat">Simpan Progress</button>
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.box-footer -->
+</div><!-- /.box -->
+}
+
+<!-- Modal -->
+@{Html.RenderPartial("_PartialDialogLookup");}
+
+
+@section scripts {
+
+<!-- Modal -->
+@{Html.RenderPartial("_Events_progress");}
+
+}

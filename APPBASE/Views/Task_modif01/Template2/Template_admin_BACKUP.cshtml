@@ -1,0 +1,28 @@
+﻿
+<script id="template" type="x-tmpl-mustache">
+{{ #result_detail }}
+    <tr>
+        <td>
+            <div class="btn-group-vertical">
+                <input type="hidden" value="{{ currentRow }}" id="currentRow{{currentRow}}" name="currentRow{{currentRow}}" />
+                <input type="hidden" value="{{ ID }}" id="DETAIL[{{currentRow}}].ID" name="DETAIL[{{currentRow}}].ID" />
+                <!-- Button -->
+                <button type="button" value="{{ ID }}" class="btnEditRow btn btn-sm btn-flat btn-warning"><i class="fa fa-pencil"></i></button>
+                <button type="button" value="{{ ID }}" class="btnDeleteRow btn btn-sm btn-flat btn-danger"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </td>
+        <td>{{ ASSIGNEE_NAME }}</td>
+        <td>{{ PROJECT_SHORTDESC }}</td>
+        <td>{{ TASKD_PLANDESC }}</td>
+        <td>{{ TASKD_PLANSTARTDT }}</td>
+        <td>{{ TASKD_PLANDURATION }} Hari</td>
+        <td>{{ TASKD_PLANENDDT }}</td>
+        <td>{{ TASKD_PROGRESSPCT }}</td>
+        <td>{{ TASKD_PROGRESSFINISHDT_STRING }}</td>
+        <td>{{ PROGRESSSTS_SHORTDESC }}</td>
+        <td>{{ TASKD_PROGRESSNOTES }}</td>
+        <td>{{ VALIDATESTS_SHORTDESC }}</td>
+        <td>{{ TASKD_VALIDATENOTES }}</td>
+    </tr>    
+{{ /result_detail }}
+</script>    

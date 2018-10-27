@@ -1,0 +1,121 @@
+﻿@model APPBASE.Models.TaskVM
+@using APPBASE.Helpers
+
+@{string vsErrClass = "";}
+@{string vsDisableButton = "";}
+@{Boolean isShowDropdown = true;}
+@{string vsReadonlyTextboxKey = "Readonly";}
+@{string vsReadonlyTextbox = "";}
+@if (ViewBag.CRUD_type == hlpFlags_CRUDOption.CREATE) { vsReadonlyTextboxKey = ""; }
+@if ((ViewBag.CRUD_type == hlpFlags_CRUDOption.VIEW) || (ViewBag.CRUD_type == hlpFlags_CRUDOption.DELETE)) { vsDisableButton = "disabled"; vsReadonlyTextbox = "Readonly"; isShowDropdown = false; }
+@{string vsDateFormat = "'alias': 'dd/mm/yyyy'";}
+    
+@for (int i = 0; i < Model.DETAIL.Count - 1; i++)
+{
+    <tr>
+        <td>
+            
+            <div class="btn-group-vertical">
+                <a href="@Url.Action("Edit_progress", new { id = Model.DETAIL[i].ID })" class="btn btn-sm btn-warning"><i class="fa fa-pencil"></i></a>
+                <a href="@Url.Action("Edit_validate", new { id = Model.DETAIL[i].ID })" class="btn btn-sm btn-success"><i class="fa fa-edit"></i></a>
+            </div>
+        </td>
+        <td>
+            <input type="hidden" id="ID_@i" name="DETAIL[@i].ID" value="@Model.DETAIL[i].ID" />
+            <input type="hidden" id="DTA_STS_@i" name="DETAIL[@i].DTA_STS" value="@Model.DETAIL[i].DTA_STS"/>
+            @if (ViewData.ModelState["ASSIGNEE_ID0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+            <div class="form-group @vsErrClass">
+                <label for="ASSIGNEE_ID"></label>
+                <select id="ASSIGNEE_ID_@i" name="DETAIL[@i].ASSIGNEE_ID" class="form-control select2" data-placeholder="" style="width: 100%;" @vsReadonlyTextbox>
+                    <option selected value=""></option>
+                    @foreach (var item in ViewBag.EMPLOYEE)
+                    {
+
+                        if (Model.DETAIL[i].ASSIGNEE_ID == item.ID)
+                        {<option selected value="@item.ID">@item.NAME</option> }
+                        else
+                        {<option value="@item.ID">@item.NAME</option> }
+                    }
+                </select>
+
+                @if (ViewData.ModelState["ASSIGNEE_ID1"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ASSIGNEE_ID1")
+                        </label>
+                }
+                @if (ViewData.ModelState["ASSIGNEE_ID2"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("ASSIGNEE_ID2")
+                        </label>
+                }
+            </div> <!-- /.form-group -->
+        </td> <!-- //End td -->
+
+        <td>
+            @if (ViewData.ModelState["TASKD_PLANDESC0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+            <div class="form-group @vsErrClass">
+                <label for="TASKD_PLANDESC"></label>
+                <input type="text" id="TASKD_PLANDESC_@i" name="DETAIL[@i].TASKD_PLANDESC" value="@Html.DisplayFor(model => model.DETAIL[i].TASKD_PLANDESC)" class="form-control" maxlength = "100" @vsReadonlyTextbox />
+
+                @if (ViewData.ModelState["TASKD_PLANDESC1"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANDESC1")
+                        </label>
+                }
+                @if (ViewData.ModelState["TASKD_PLANDESC2"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANDESC2")
+                        </label>
+                }
+            </div> <!-- /.form-group -->
+        </td> <!-- //End td -->
+
+        <td>
+            @if (ViewData.ModelState["TASKD_PLANSTARTDT0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+            <div class="form-group @vsErrClass">
+                <label for="TASKD_PLANSTARTDT"></label>
+                <input type="text" id="TASKD_PLANSTARTDT_@i" name="DETAIL[@i].TASKD_PLANSTARTDT" value="@Html.DisplayFor(model => model.DETAIL[i].TASKD_PLANSTARTDT)" class="form-control" @vsReadonlyTextbox data-inputmask="@vsDateFormat" data-mask />
+
+            
+                @if (ViewData.ModelState["TASKD_PLANSTARTDT1"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANSTARTDT1")
+                        </label>
+                }
+                @if (ViewData.ModelState["TASKD_PLANSTARTDT2"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANSTARTDT2")
+                        </label>
+                }
+            </div> <!-- /.form-group -->
+        </td> <!-- //End td -->
+
+        <td>
+            @if (ViewData.ModelState["TASKD_PLANDURATION0"] != null) { vsErrClass = "has-error"; } else { vsErrClass = ""; }
+            <div class="form-group @vsErrClass">
+                <label for="TASKD_PLANDURATION"></label>
+                <input type="text" id="TASKD_PLANDURATION_@i" name="DETAIL[@i].TASKD_PLANDURATION" value="@Html.DisplayFor(model => model.DETAIL[i].TASKD_PLANDURATION)" class="form-control data-mask-integer"  readonly />
+
+                @if (ViewData.ModelState["TASKD_PLANDURATION1"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANDURATION1")
+                        </label>
+                }
+                @if (ViewData.ModelState["TASKD_PLANDURATION2"] != null)
+                {
+                        <label class="control-label" for="inputError">
+                        <i class="fa fa-times-circle-o"></i> @Html.ValidationMessage("TASKD_PLANDURATION2")
+                        </label>
+                }
+            </div> <!-- /.form-group -->
+        </td> <!-- //End td -->
+    </tr>
+}
+ 
