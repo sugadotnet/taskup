@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Appname = "Taskup "+hlpConfig.SessionInfo.getAppVer();
+    ViewBag.Appname = "Taskup " + hlpConfig.SessionInfo.getAppVer();
 }
 
 @using APPBASE.Helpers
@@ -47,7 +47,7 @@
         
             <a href="@Url.Action("Index", "Home")" class="logo" style="padding:0 10px 0 10px;">
                 <!-- Add the class icon to your logo image or logo icon to add the margining -->
-                <img style="width:auto; height: 90%; margin:0;" src="@Url.Content("~/")Images/logonav.png" alt="@ViewBag.Appname" />
+                <img style="width:auto; height: 90%; margin:0;" src="@Url.Content("~/")Images/logonavbar.png" alt="@ViewBag.Appname" />
             </a>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top" role="navigation">

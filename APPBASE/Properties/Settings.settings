@@ -8,11 +8,14 @@
     <Setting Name="DB01SERVER" Type="System.String" Scope="Application">
       <Value Profile="(Default)">PfREfbONWpl2awPVbiT2Wfktq9w==</Value>
     </Setting>
+    <Setting Name="DB01NAME" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">VLfnVAspr72KEGxubYf9lO39ppg==</Value>
+    </Setting>
     <Setting Name="DB01USERID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ihsqIVOoH1SbosZsEyFYs3aLiVg==</Value>
+      <Value Profile="(Default)">xrcoxxsXSQhBPlN0pSRqtuA+8EQ==</Value>
     </Setting>
     <Setting Name="DB01PASSWORD" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">HaYFsykIz/sGlOXsFDKohM6Iskg==</Value>
+      <Value Profile="(Default)">fpBIjG9c+Xd8zNWZalmmYYn6Big==</Value>
     </Setting>
     <Setting Name="DB02TYPE" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
@@ -46,9 +49,6 @@
     </Setting>
     <Setting Name="DBNO" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1</Value>
-    </Setting>
-    <Setting Name="DB01NAME" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">ntgKI5e5zAXk2diA5wsas0RdIsA==</Value>
     </Setting>
   </Settings>
 </SettingsFile>

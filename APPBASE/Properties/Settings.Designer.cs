@@ -43,7 +43,16 @@ namespace APPBASE.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ihsqIVOoH1SbosZsEyFYs3aLiVg==")]
+        [global::System.Configuration.DefaultSettingValueAttribute("VLfnVAspr72KEGxubYf9lO39ppg==")]
+        public string DB01NAME {
+            get {
+                return ((string)(this["DB01NAME"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("xrcoxxsXSQhBPlN0pSRqtuA+8EQ==")]
         public string DB01USERID {
             get {
                 return ((string)(this["DB01USERID"]));
@@ -52,7 +61,7 @@ namespace APPBASE.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("HaYFsykIz/sGlOXsFDKohM6Iskg==")]
+        [global::System.Configuration.DefaultSettingValueAttribute("fpBIjG9c+Xd8zNWZalmmYYn6Big==")]
         public string DB01PASSWORD {
             get {
                 return ((string)(this["DB01PASSWORD"]));
@@ -155,15 +164,6 @@ namespace APPBASE.Properties {
         public string DBNO {
             get {
                 return ((string)(this["DBNO"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ntgKI5e5zAXk2diA5wsas0RdIsA==")]
-        public string DB01NAME {
-            get {
-                return ((string)(this["DB01NAME"]));
             }
         }
     }
