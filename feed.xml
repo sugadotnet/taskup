@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TaskUp</title>
+    <description>Apps for Task Monitoring</description>
+    <link>http://arinsuga.com/taskup/</link>
+    <atom:link href="http://arinsuga.com/taskup/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 12 Nov 2018 15:26:22 +0700</pubDate>
+    <lastBuildDate>Mon, 12 Nov 2018 15:26:22 +0700</lastBuildDate>
+    <generator>Jekyll v3.6.3</generator>
+    
+  </channel>
+</rss>
